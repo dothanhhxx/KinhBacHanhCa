@@ -1,0 +1,139 @@
+backend:
+  # Using git-gateway for Netlify, or set up for local dev. 
+  # Set to "local" proxy if you want to run purely locally without GitHub.
+  name: git-gateway
+  branch: main # Branch to update
+
+local_backend: true
+
+media_folder: "frontend/images" # Folder where uploaded files will be saved
+public_folder: "images" # The src attribute for uploaded images
+
+collections:
+  - name: "museum_data"
+    label: "Nội dung Website"
+    files:
+      - label: "Dữ liệu Landing Page"
+        name: "data"
+        file: "frontend/data.json"
+        description: "Quản lý toàn bộ nội dung, hình ảnh và video của trang web."
+        fields:
+          # META DATA
+          - label: "Meta & Thông tin chung"
+            name: "meta"
+            widget: "object"
+            fields:
+              - {label: "Tiêu đề (Tiếng Việt)", name: "titleVi", widget: "string"}
+              - {label: "Tiêu đề (Tiếng Anh)", name: "titleEn", widget: "string"}
+              - {label: "Khẩu hiệu (Tiếng Việt)", name: "taglineVi", widget: "string"}
+              - {label: "Khẩu hiệu (Tiếng Anh)", name: "taglineEn", widget: "string"}
+              - {label: "Địa chỉ", name: "address", widget: "string"}
+              - {label: "Điện thoại", name: "phone", widget: "string"}
+              - {label: "Email", name: "email", widget: "string"}
+              - label: "Giờ mở cửa"
+                name: "hours"
+                widget: "object"
+                fields:
+                  - {label: "Giờ mở cửa (Tiếng Việt)", name: "vi", widget: "string"}
+                  - {label: "Giờ mở cửa (Tiếng Anh)", name: "en", widget: "string"}
+          
+          # ABOUT
+          - label: "Phần Giới Thiệu"
+            name: "about"
+            widget: "object"
+            fields:
+              - {label: "Tiêu đề chính (VN)", name: "titleVi", widget: "string"}
+              - {label: "Tiêu đề chính (EN)", name: "titleEn", widget: "string"}
+              - {label: "Nội dung (VN)", name: "contentVi", widget: "text"}
+              - {label: "Nội dung (EN)", name: "contentEn", widget: "text"}
+              - {label: "Hình ảnh", name: "image", widget: "image"}
+              - label: "Thống kê"
+                name: "stats"
+                widget: "list"
+                fields:
+                  - {label: "Con số", name: "value", widget: "string"}
+                  - {label: "Nhãn (VN)", name: "labelVi", widget: "string"}
+                  - {label: "Nhãn (EN)", name: "labelEn", widget: "string"}
+
+          # PERIODS
+          - label: "Các Thời Kỳ Lịch Sử"
+            name: "periods"
+            widget: "list"
+            fields:
+              - {label: "ID", name: "id", widget: "string"}
+              - {label: "Giai đoạn (Năm)", name: "years", widget: "string"}
+              - {label: "Tên Thời Kỳ (VN)", name: "titleVi", widget: "string"}
+              - {label: "Tên Thời Kỳ (EN)", name: "titleEn", widget: "string"}
+              - {label: "Mô tả (VN)", name: "descVi", widget: "text"}
+              - {label: "Mô tả (EN)", name: "descEn", widget: "text"}
+              - label: "Hiện vật tiêu biểu"
+                name: "artifacts"
+                widget: "list"
+                fields:
+                  - {label: "Hình ảnh", name: "image", widget: "image"}
+                  - {label: "Chú thích (VN)", name: "captionVi", widget: "string"}
+                  - {label: "Chú thích (EN)", name: "captionEn", widget: "string"}
+
+          # TIMELINE
+          - label: "Niên biểu Lịch Sử"
+            name: "timeline"
+            widget: "list"
+            fields:
+              - {label: "Năm", name: "year", widget: "string"}
+              - {label: "Sự kiện (VN)", name: "titleVi", widget: "string"}
+              - {label: "Sự kiện (EN)", name: "titleEn", widget: "string"}
+              - {label: "Mô tả (VN)", name: "descVi", widget: "text"}
+              - {label: "Mô tả (EN)", name: "descEn", widget: "text"}
+
+          # GALLERY
+          - label: "Bộ sưu tập (Gallery)"
+            name: "gallery"
+            widget: "list"
+            fields:
+              - {label: "Hình ảnh", name: "image", widget: "image"}
+              - {label: "Chú thích (VN)", name: "captionVi", widget: "string"}
+              - {label: "Chú thích (EN)", name: "captionEn", widget: "string"}
+              - {label: "Thuộc thời kỳ (ID)", name: "era", widget: "string"}
+
+          # VIDEOS
+          - label: "Phỏng vấn & Video"
+            name: "videos"
+            widget: "object"
+            fields:
+              - label: "Các bài phỏng vấn"
+                name: "interviews"
+                widget: "list"
+                fields:
+                  - {label: "ID", name: "id", widget: "string"}
+                  - {label: "Tên nhân vật (VN)", name: "titleVi", widget: "string"}
+                  - {label: "Tên nhân vật (EN)", name: "titleEn", widget: "string"}
+                  - {label: "Vai trò", name: "role", widget: "string"}
+              - label: "Video chính"
+                name: "featured"
+                widget: "object"
+                fields:
+                  - {label: "Tiêu đề (VN)", name: "titleVi", widget: "string"}
+                  - {label: "Tiêu đề (EN)", name: "titleEn", widget: "string"}
+                  - {label: "Mô tả (VN)", name: "descVi", widget: "text"}
+                  - {label: "Mô tả (EN)", name: "descEn", widget: "text"}
+
+          # TESTIMONIALS
+          - label: "Khách tham quan"
+            name: "testimonials"
+            widget: "list"
+            fields:
+              - {label: "Trích dẫn (VN)", name: "quoteVi", widget: "text"}
+              - {label: "Trích dẫn (EN)", name: "quoteEn", widget: "text"}
+              - {label: "Tên khách", name: "name", widget: "string"}
+              - {label: "Chức danh (VN)", name: "roleVi", widget: "string"}
+              - {label: "Chức danh (EN)", name: "roleEn", widget: "string"}
+              - {label: "Icon / Emoji", name: "avatar", widget: "string"}
+
+          # NAVIGATION (Keep at bottom)
+          - label: "Menu Điều Hướng"
+            name: "nav"
+            widget: "list"
+            fields:
+              - {label: "ID (Không đổi)", name: "id", widget: "string"}
+              - {label: "Tên Menu (VN)", name: "labelVi", widget: "string"}
+              - {label: "Tên Menu (EN)", name: "labelEn", widget: "string"}

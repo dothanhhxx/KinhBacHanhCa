@@ -1,0 +1,165 @@
+{
+  "meta": {
+    "titleVi": "Bảo tàng Lịch sử Quân sự Việt Nam",
+    "titleEn": "Vietnam Military History Museum",
+    "taglineVi": "Khám phá hành trình dựng nước và giữ nước của Việt Nam qua các hiện vật lịch sử và triển lãm sống động.",
+    "taglineEn": "Explore Vietnam's journey of nation-building and defense through historical artifacts and immersive exhibitions.",
+    "address": "28A Điện Biên Phủ, Quận Ba Đình, Hà Nội, Việt Nam",
+    "phone": "+84 24 6253 1367",
+    "email": "info@btlsqsvn.vn",
+    "hours": {
+      "vi": "Thứ 3 – Chủ Nhật: 8:00 – 17:00 | Thứ 2: Nghỉ",
+      "en": "Tue – Sun: 8:00 AM – 5:00 PM | Monday: Closed"
+    }
+  },
+  "nav": [
+    { "id": "about", "labelVi": "Giới thiệu", "labelEn": "About" },
+    { "id": "periods", "labelVi": "Lịch sử", "labelEn": "History" },
+    { "id": "timeline", "labelVi": "Niên biểu", "labelEn": "Timeline" },
+    { "id": "gallery", "labelVi": "Hiện vật", "labelEn": "Artifacts" },
+    { "id": "videos", "labelVi": "Video", "labelEn": "Videos" },
+    { "id": "visitors", "labelVi": "Khách tham quan", "labelEn": "Visitors" }
+  ],
+  "about": {
+    "titleVi": "Về Triển lãm",
+    "titleEn": "About the Exhibition",
+    "contentVi": "Bảo tàng Lịch sử Quân sự Việt Nam là nơi lưu giữ và trưng bày những hiện vật quý giá, tái hiện hành trình hàng nghìn năm dựng nước và giữ nước của dân tộc Việt Nam. Với hơn 150.000 hiện vật và tư liệu, bảo tàng mang đến cho du khách cái nhìn toàn diện về tinh thần bất khuất và truyền thống anh hùng của quân và dân Việt Nam qua các thời kỳ lịch sử.",
+    "contentEn": "The Vietnam Military History Museum preserves and displays precious artifacts, recreating the thousand-year journey of nation-building and defense of the Vietnamese people. With over 150,000 artifacts and documents, the museum offers visitors a comprehensive view of the indomitable spirit and heroic traditions of Vietnam's military and people throughout historical periods.",
+    "image": "images/exhibition_hall.png",
+    "stats": [
+      { "value": "150,000+", "labelVi": "Hiện vật", "labelEn": "Artifacts" },
+      { "value": "1954", "labelVi": "Năm thành lập", "labelEn": "Year Founded" },
+      { "value": "12,800 m²", "labelVi": "Diện tích", "labelEn": "Exhibition Area" },
+      { "value": "500K+", "labelVi": "Lượt khách/năm", "labelEn": "Visitors/Year" }
+    ]
+  },
+  "periods": [
+    {
+      "id": "era-1",
+      "titleVi": "Buổi đầu dựng nước",
+      "titleEn": "The Early Days of Nation-Building",
+      "years": "2879 TCN – 938",
+      "descVi": "Từ thời đại Hùng Vương dựng nước Văn Lang đến chiến thắng Bạch Đằng năm 938, dân tộc Việt Nam đã viết nên những trang sử hào hùng đầu tiên trong công cuộc chống ngoại xâm, bảo vệ bờ cõi.",
+      "descEn": "From the Hung Kings founding Van Lang to the Bach Dang victory in 938, the Vietnamese people wrote the first heroic pages of history in the fight against foreign invasion and defense of the homeland.",
+      "artifacts": [
+        { "image": "images/bronze_drum.png", "captionVi": "Trống đồng Đông Sơn", "captionEn": "Dong Son Bronze Drum" },
+        { "image": "images/loa_arrowheads.png", "captionVi": "Mũi tên đồng Cổ Loa", "captionEn": "Co Loa Bronze Arrowheads" }
+      ]
+    },
+    {
+      "id": "era-2",
+      "titleVi": "Đấu tranh giữ nước",
+      "titleEn": "The Struggle to Defend Independence",
+      "years": "938 – 1858",
+      "descVi": "Gần một thiên niên kỷ kiên cường bảo vệ nền độc lập, từ triều đại Ngô-Đinh-Lê-Lý-Trần-Lê-Nguyễn, quân dân Việt Nam đã chiến thắng nhiều cuộc xâm lược lớn, đặc biệt là ba lần đánh tan quân Nguyên-Mông.",
+      "descEn": "Nearly a millennium of steadfast defense of independence, from the Ngo-Dinh-Le-Ly-Tran-Le-Nguyen dynasties, the Vietnamese military and people defeated many major invasions, notably repelling the Mongol forces three times.",
+      "artifacts": [
+        { "image": "images/ancient_weapons.png", "captionVi": "Vũ khí thời phong kiến", "captionEn": "Feudal Era Weapons" },
+        { "image": "images/historical_documents.png", "captionVi": "Tài liệu lịch sử", "captionEn": "Historical Documents" }
+      ]
+    },
+    {
+      "id": "era-3",
+      "titleVi": "Kháng chiến chống thực dân",
+      "titleEn": "Resistance Against Colonialism",
+      "years": "1858 – 1954",
+      "descVi": "Từ khi thực dân Pháp xâm lược đến chiến thắng lịch sử Điện Biên Phủ, nhân dân Việt Nam dưới sự lãnh đạo của Đảng và Chủ tịch Hồ Chí Minh đã giành lại độc lập, tự do cho dân tộc.",
+      "descEn": "From the French colonial invasion to the historic Dien Bien Phu victory, the Vietnamese people under the leadership of the Party and President Ho Chi Minh reclaimed independence and freedom for the nation.",
+      "artifacts": [
+        { "image": "images/war_memorabilia.png", "captionVi": "Kỷ vật kháng chiến", "captionEn": "Resistance War Memorabilia" },
+        { "image": "images/military_uniforms.png", "captionVi": "Quân phục qua các thời kỳ", "captionEn": "Military Uniforms Through Eras" }
+      ]
+    },
+    {
+      "id": "era-4",
+      "titleVi": "Chiến tranh giải phóng",
+      "titleEn": "The Liberation War",
+      "years": "1954 – 1975",
+      "descVi": "Cuộc kháng chiến chống Mỹ cứu nước kéo dài hơn 20 năm, kết thúc bằng Chiến dịch Hồ Chí Minh lịch sử, thống nhất đất nước, mở ra kỷ nguyên mới cho dân tộc Việt Nam.",
+      "descEn": "The resistance war against American imperialism lasted over 20 years, concluding with the historic Ho Chi Minh Campaign, reunifying the country and opening a new era for the Vietnamese nation.",
+      "artifacts": [
+        { "image": "images/war_memorabilia.png", "captionVi": "Di vật chiến tranh", "captionEn": "War Artifacts" },
+        { "image": "images/military_uniforms.png", "captionVi": "Trang phục chiến sĩ", "captionEn": "Soldier Uniforms" }
+      ]
+    },
+    {
+      "id": "era-5",
+      "titleVi": "Bảo vệ Tổ quốc",
+      "titleEn": "Defending the Homeland",
+      "years": "1975 – Nay",
+      "descVi": "Sau ngày thống nhất, quân đội nhân dân Việt Nam tiếp tục sứ mệnh bảo vệ Tổ quốc, xây dựng quân đội chính quy, hiện đại, sẵn sàng bảo vệ chủ quyền và toàn vẹn lãnh thổ.",
+      "descEn": "After reunification, the Vietnam People's Army continues its mission of defending the homeland, building a regular and modern military force, ready to protect sovereignty and territorial integrity.",
+      "artifacts": [
+        { "image": "images/military_uniforms.png", "captionVi": "Quân đội hiện đại", "captionEn": "Modern Military" },
+        { "image": "images/historical_documents.png", "captionVi": "Tư liệu hiện đại", "captionEn": "Modern Documents" }
+      ]
+    }
+  ],
+  "timeline": [
+    { "year": "2879 TCN", "titleVi": "Nước Văn Lang", "titleEn": "Van Lang Kingdom", "descVi": "Vua Hùng dựng nước Văn Lang — nhà nước đầu tiên trong lịch sử Việt Nam.", "descEn": "King Hung founded Van Lang — the first state in Vietnamese history." },
+    { "year": "40", "titleVi": "Hai Bà Trưng", "titleEn": "Trung Sisters", "descVi": "Hai Bà Trưng khởi nghĩa chống ách đô hộ nhà Hán, giành độc lập.", "descEn": "The Trung Sisters led an uprising against Han Dynasty rule, reclaiming independence." },
+    { "year": "938", "titleVi": "Chiến thắng Bạch Đằng", "titleEn": "Bach Dang Victory", "descVi": "Ngô Quyền đánh bại quân Nam Hán trên sông Bạch Đằng, kết thúc 1000 năm Bắc thuộc.", "descEn": "Ngo Quyen defeated the Southern Han on the Bach Dang River, ending 1000 years of Chinese domination." },
+    { "year": "1288", "titleVi": "Đại thắng quân Nguyên", "titleEn": "Mongol Defeat", "descVi": "Trần Hưng Đạo lần thứ ba đánh bại quân xâm lược Nguyên-Mông.", "descEn": "Tran Hung Dao defeated the Mongol invaders for the third time." },
+    { "year": "1428", "titleVi": "Khởi nghĩa Lam Sơn", "titleEn": "Lam Son Uprising", "descVi": "Lê Lợi giải phóng đất nước khỏi ách đô hộ nhà Minh sau 10 năm kháng chiến.", "descEn": "Le Loi liberated the country from Ming Dynasty rule after 10 years of resistance." },
+    { "year": "1789", "titleVi": "Chiến thắng Ngọc Hồi – Đống Đa", "titleEn": "Ngoc Hoi – Dong Da Victory", "descVi": "Vua Quang Trung đánh tan 29 vạn quân Thanh trong 5 ngày Tết Kỷ Dậu.", "descEn": "King Quang Trung defeated 290,000 Qing troops in 5 days during the Ky Dau New Year." },
+    { "year": "1945", "titleVi": "Cách mạng Tháng Tám", "titleEn": "August Revolution", "descVi": "Chủ tịch Hồ Chí Minh đọc Tuyên ngôn Độc lập, khai sinh nước Việt Nam Dân chủ Cộng hòa.", "descEn": "President Ho Chi Minh read the Declaration of Independence, founding the Democratic Republic of Vietnam." },
+    { "year": "1954", "titleVi": "Chiến thắng Điện Biên Phủ", "titleEn": "Dien Bien Phu Victory", "descVi": "\"Lừng lẫy năm châu, chấn động địa cầu\" — chiến thắng quyết định kết thúc chế độ thực dân Pháp.", "descEn": "\"Resounding across five continents, shaking the globe\" — the decisive victory ending French colonial rule." },
+    { "year": "1975", "titleVi": "Giải phóng miền Nam", "titleEn": "Liberation of the South", "descVi": "Chiến dịch Hồ Chí Minh toàn thắng, thống nhất đất nước.", "descEn": "The Ho Chi Minh Campaign achieved total victory, reunifying the country." }
+  ],
+  "gallery": [
+    { "image": "images/bronze_drum.png", "captionVi": "Trống đồng Đông Sơn", "captionEn": "Dong Son Bronze Drum", "era": "era-1" },
+    { "image": "images/loa_arrowheads.png", "captionVi": "Mũi tên đồng Cổ Loa", "captionEn": "Co Loa Bronze Arrowheads", "era": "era-1" },
+    { "image": "images/ancient_weapons.png", "captionVi": "Vũ khí cổ đại", "captionEn": "Ancient Weapons", "era": "era-2" },
+    { "image": "images/war_memorabilia.png", "captionVi": "Kỷ vật chiến tranh", "captionEn": "War Memorabilia", "era": "era-3" },
+    { "image": "images/historical_documents.png", "captionVi": "Tài liệu lịch sử", "captionEn": "Historical Documents", "era": "era-2" },
+    { "image": "images/military_uniforms.png", "captionVi": "Quân phục qua các thời kỳ", "captionEn": "Military Uniforms Through Eras", "era": "era-3" }
+  ],
+  "videos": {
+    "interviews": [
+      { "id": "v1", "titleVi": "GS. Nguyễn Văn Minh", "titleEn": "Prof. Nguyen Van Minh", "role": "Nhà sử học — Historian" },
+      { "id": "v2", "titleVi": "Đại tá Trần Quốc Hùng", "titleEn": "Col. Tran Quoc Hung", "role": "Cựu chiến binh — Veteran" },
+      { "id": "v3", "titleVi": "Sinh viên Lê Thị Hoa", "titleEn": "Student Le Thi Hoa", "role": "Sinh viên — Student" },
+      { "id": "v4", "titleVi": "Nguyễn Thanh Tùng", "titleEn": "Nguyen Thanh Tung", "role": "Hướng dẫn viên — Guide" }
+    ],
+    "featured": {
+      "titleVi": "Hành trình qua lịch sử",
+      "titleEn": "A Journey Through History",
+      "descVi": "Phim tài liệu về hành trình dựng nước và giữ nước của dân tộc Việt Nam",
+      "descEn": "A documentary about the journey of nation-building and defense of the Vietnamese people"
+    }
+  },
+  "testimonials": [
+    {
+      "quoteVi": "Bảo tàng mang đến trải nghiệm sâu sắc, giúp tôi hiểu thêm về lịch sử hào hùng của dân tộc.",
+      "quoteEn": "The museum provides a profound experience, helping me understand more about the heroic history of the nation.",
+      "name": "Nguyễn Minh Anh",
+      "roleVi": "Sinh viên Đại học Quốc gia",
+      "roleEn": "National University Student",
+      "avatar": "👩‍🎓"
+    },
+    {
+      "quoteVi": "Một trong những bảo tàng ấn tượng nhất mà tôi từng ghé thăm tại Đông Nam Á.",
+      "quoteEn": "One of the most impressive museums I have ever visited in Southeast Asia.",
+      "name": "David Morrison",
+      "roleVi": "Du khách quốc tế",
+      "roleEn": "International Tourist",
+      "avatar": "🌍"
+    },
+    {
+      "quoteVi": "Các hiện vật được trưng bày rất chuyên nghiệp, thông tin phong phú và dễ tiếp cận.",
+      "quoteEn": "The artifacts are displayed very professionally, with rich and accessible information.",
+      "name": "Trần Thị Mai",
+      "roleVi": "Giáo viên lịch sử",
+      "roleEn": "History Teacher",
+      "avatar": "👩‍🏫"
+    },
+    {
+      "quoteVi": "Con tôi rất hào hứng khi được tận mắt nhìn thấy những hiện vật mà các con đã học trong sách giáo khoa.",
+      "quoteEn": "My children were thrilled to see firsthand the artifacts they had studied in their textbooks.",
+      "name": "Phạm Văn Đức",
+      "roleVi": "Phụ huynh",
+      "roleEn": "Parent",
+      "avatar": "👨‍👧‍👦"
+    }
+  ]
+}
