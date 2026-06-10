@@ -1025,6 +1025,28 @@ ul, ol {
   transform: translateY(-50%);
 }
 
+/* Download button — bottom-left, muted glass */
+.lightbox-download {
+  bottom: var(--space-6);
+  left: var(--space-6);
+  top: auto;
+  transform: none;
+  opacity: 0.35;
+  text-decoration: none;
+  font-size: var(--text-base);
+  transition: opacity var(--duration-normal), background var(--duration-fast);
+}
+
+.lightbox-download:hover {
+  opacity: 0.85;
+  background: rgba(255,255,255,0.18);
+}
+
+.lightbox-download:focus-visible {
+  opacity: 1;
+  outline: 3px solid var(--color-accent);
+}
+
 /* ── VIDEO SECTION ─────────────────────────────────────────── */
 .video-interviews-grid {
   display: grid;
@@ -1772,5 +1794,324 @@ ul, ol {
   body {
     color: #000;
     background: #fff;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LEADERSHIP SECTION — Modern Formal Cards
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Grid: 4 columns on desktop, 2 on tablet, 1 on mobile */
+.leadership-grid {
+  width: 100%;
+}
+
+.leadership-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+}
+
+/* Individual leader card */
+.leader-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--color-accent);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-4);
+  box-shadow: var(--shadow-md);
+  transition: all var(--duration-normal) var(--ease-out);
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+
+.leader-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(200,16,46,0.03) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.leader-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+  border-top-color: var(--color-accent-dark);
+}
+
+.leader-card:first-child {
+  border-top-color: var(--color-accent-gold);
+}
+
+.leader-card:first-child .leader-card__icon {
+  color: var(--color-accent-gold);
+}
+
+.leader-card__icon {
+  font-size: 2rem;
+  color: var(--color-accent);
+  line-height: 1;
+  opacity: 0.7;
+}
+
+.leader-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.leader-card__role {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  padding: var(--space-1) var(--space-3);
+  background: rgba(200, 16, 46, 0.07);
+  border-radius: var(--radius-full);
+  display: inline-block;
+}
+
+.leader-card:first-child .leader-card__role {
+  color: var(--color-accent-gold);
+  background: rgba(184, 134, 11, 0.09);
+}
+
+.leader-card__name-vi {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.25;
+  margin-top: var(--space-1);
+}
+
+.leader-card__name-en {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-style: italic;
+  color: var(--color-text-muted);
+}
+
+/* ── Distinguished Artists block ─── */
+.artists-block {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-10) var(--space-10);
+  box-shadow: var(--shadow-sm);
+}
+
+.artists-block__header {
+  margin-bottom: var(--space-8);
+}
+
+.artists-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.artist-tag {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  padding: var(--space-2) var(--space-5);
+  border-radius: var(--radius-full);
+  background: var(--color-bg-alt);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  transition: all var(--duration-fast);
+  cursor: default;
+}
+
+.artist-tag:hover {
+  background: var(--color-text);
+  color: white;
+  border-color: var(--color-text);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.artist-tag--nsnd {
+  background: rgba(184, 134, 11, 0.1);
+  color: var(--color-accent-gold);
+  border-color: rgba(184, 134, 11, 0.3);
+  font-weight: 600;
+}
+
+.artist-tag--nsnd:hover {
+  background: var(--color-accent-gold);
+  color: white;
+  border-color: var(--color-accent-gold);
+}
+
+.artist-tag--more {
+  font-style: italic;
+  color: var(--color-text-light);
+  border-style: dashed;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MILESTONES TABLE — Premium Timeline Table
+   ═══════════════════════════════════════════════════════════════ */
+
+.milestones-block .section-header {
+  margin-bottom: var(--space-12);
+}
+
+.milestones-table {
+  width: 100%;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+}
+
+/* Header row — single full-width merged cell */
+.milestone-row--header {
+  background: var(--color-bg-alt);
+  display: block;
+  padding: var(--space-8) var(--space-8) var(--space-6);
+  border-bottom: 2px solid var(--color-border);
+  text-align: center;
+}
+
+/* Full-width heading block: Vi title + En subtitle on one horizontal row */
+.ms-header-full {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.ms-year-main {
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-3xl), 4vw, var(--text-5xl));
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.ms-year-sub {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--color-text-muted);
+  letter-spacing: 0;
+}
+
+/* Data rows */
+.milestone-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  align-items: center;
+  gap: var(--space-8);
+  padding: var(--space-6) var(--space-8);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  transition: background var(--duration-fast);
+}
+
+.milestone-row:not(.milestone-row--header):last-child {
+  border-bottom: none;
+}
+
+.milestone-row:not(.milestone-row--header):hover {
+  background: var(--color-bg);
+}
+
+/* Highlight row (UNESCO 2009, completion 2020) */
+.milestone-row--highlight {
+  background: linear-gradient(90deg, rgba(200,16,46,0.04) 0%, var(--color-surface) 100%);
+  border-left: 3px solid var(--color-accent);
+}
+
+.milestone-row--highlight:hover {
+  background: linear-gradient(90deg, rgba(200,16,46,0.07) 0%, var(--color-bg) 100%) !important;
+}
+
+/* Year column */
+.ms-year {
+  display: flex;
+  align-items: center;
+}
+
+.ms-year span {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--color-text-light);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.milestone-row--highlight .ms-year span {
+  color: var(--color-accent);
+}
+
+/* Content column */
+.ms-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.ms-vi {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.35;
+}
+
+.ms-en {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-style: italic;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+/* ── Responsive: Leadership & Milestones ── */
+@media (max-width: 1024px) {
+  .leadership-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .leadership-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .milestone-row,
+  .milestone-row--header {
+    grid-template-columns: 80px 1fr;
+    gap: var(--space-4);
+    padding: var(--space-4) var(--space-4);
+  }
+
+  .ms-year span {
+    font-size: var(--text-lg);
+  }
+
+  .ms-vi {
+    font-size: var(--text-base);
+  }
+
+  .artists-block {
+    padding: var(--space-6);
   }
 }

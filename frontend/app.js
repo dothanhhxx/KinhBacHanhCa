@@ -148,57 +148,81 @@ function renderAbout() {
 }
 
 // ═══════════════════════════════════════════════════════════════
-// RENDER HISTORICAL PERIODS
+// RENDER LEADERSHIP SECTION (formerly Historical Periods)
 // ═══════════════════════════════════════════════════════════════
 
 function renderPeriods() {
   const container = document.getElementById('periods-container');
+  if (!container) return;
 
-  MUSEUM_DATA.periods.forEach((era, eraIndex) => {
-    const eraEl = document.createElement('div');
-    eraEl.className = 'era fade-in-up';
-    eraEl.id = era.id;
+  // Leadership data (era-1 = Ban Lãnh Đạo, era-2 = Distinguished Artists)
+  const leadershipData = [
+    {
+      role: 'Giám Đốc · Director',
+      nameVi: 'Ông Phạm Văn Thắng',
+      nameEn: 'Mr. Pham Van Thang',
+      icon: '◈'
+    },
+    {
+      role: 'Phó Giám Đốc · Vice Director',
+      nameVi: 'Ông Lương Trung Kiên',
+      nameEn: 'Mr. Luong Trung Kien',
+      icon: '◇'
+    },
+    {
+      role: 'Phó Giám Đốc · Vice Director',
+      nameVi: 'Bà Nguyễn Thị Hương Giang',
+      nameEn: 'Ms. Nguyen Thi Huong Giang',
+      icon: '◇'
+    },
+    {
+      role: 'Phó Giám Đốc · Vice Director',
+      nameVi: 'Bà Nguyễn Thị Quý',
+      nameEn: 'Ms. Nguyen Thi Quy',
+      icon: '◇'
+    }
+  ];
 
-    let artifactsHTML = '';
-    era.artifacts.forEach((artifact, i) => {
-      artifactsHTML += `
-        <div class="artifact-card stagger-item"
-             style="transition-delay: ${i * 50}ms;"
-             tabindex="0"
-             role="button"
-             aria-label="${artifact.captionVi}"
-             data-gallery-index="${i}"
-             data-era="${era.id}">
-          <div style="overflow: hidden;">
-            <img src="${artifact.image}"
-                 alt="${artifact.captionVi} — ${artifact.captionEn}"
-                 loading="lazy"
-                 width="400" height="300">
-          </div>
-          <div class="artifact-caption">
-            <div class="caption-vi">${artifact.captionVi}</div>
-            <div class="caption-en">${artifact.captionEn}</div>
-          </div>
-        </div>
-      `;
-    });
-
-    eraEl.innerHTML = `
-      <div class="era-header">
-        <div class="era-years">${era.years}</div>
-        <div class="era-info">
-          <h3 class="title-vi">${era.titleVi}</h3>
-          <p class="title-en">${era.titleEn}</p>
-          <p class="era-desc">${era.descVi}</p>
-        </div>
+  // Render leadership cards
+  const directorsBlock = document.createElement('div');
+  directorsBlock.className = 'leadership-cards stagger-item';
+  directorsBlock.innerHTML = leadershipData.map((person, i) => `
+    <div class="leader-card stagger-item" style="transition-delay:${i*80}ms;" tabindex="0">
+      <div class="leader-card__icon">${person.icon}</div>
+      <div class="leader-card__body">
+        <div class="leader-card__role">${person.role}</div>
+        <div class="leader-card__name-vi">${person.nameVi}</div>
+        <div class="leader-card__name-en">${person.nameEn}</div>
       </div>
-      <div class="era-artifacts">
-        ${artifactsHTML}
-      </div>
-    `;
+    </div>
+  `).join('');
+  container.appendChild(directorsBlock);
 
-    container.appendChild(eraEl);
-  });
+  // Artists block
+  const artistsBlock = document.createElement('div');
+  artistsBlock.className = 'artists-block fade-in-up';
+  artistsBlock.style.marginTop = 'var(--space-12)';
+  artistsBlock.innerHTML = `
+    <div class="artists-block__header">
+      <span class="label-mono">Nghệ sĩ · Artists</span>
+      <h3 class="title-vi" style="font-size: var(--text-2xl); margin: var(--space-2) 0;">Các Nghệ Sĩ Tiêu Biểu</h3>
+      <p class="title-en">Distinguished Artists</p>
+    </div>
+    <div class="artists-tags">
+      <span class="artist-tag artist-tag--nsnd">NSND Thúy Cải</span>
+      <span class="artist-tag artist-tag--nsnd">NSND Thúy Hường</span>
+      <span class="artist-tag">NSƯT Khánh Hạ</span>
+      <span class="artist-tag">NSƯT Lan Hương</span>
+      <span class="artist-tag">NSƯT Hải Xuân</span>
+      <span class="artist-tag">NSƯT Xuân Mùi</span>
+      <span class="artist-tag">NSƯT Quang Vinh</span>
+      <span class="artist-tag">NSƯT Lệ Ngải</span>
+      <span class="artist-tag">NSƯT Hồng Mạnh</span>
+      <span class="artist-tag">NSƯT Lệ Thanh</span>
+      <span class="artist-tag artist-tag--more">và nhiều nghệ sĩ khác...</span>
+    </div>
+  `;
+  container.appendChild(artistsBlock);
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -251,12 +275,14 @@ function renderGallery() {
 
   MUSEUM_DATA.gallery.forEach((item, i) => {
     const el = document.createElement('div');
+    const orientation = item.orientation || 'landscape';
     el.className = 'gallery-item scale-in';
     el.style.transitionDelay = `${i * 60}ms`;
     el.setAttribute('tabindex', '0');
     el.setAttribute('role', 'button');
     el.setAttribute('aria-label', `Xem ${item.captionVi}`);
     el.dataset.galleryIndex = i;
+    el.dataset.orientation = orientation;
 
     el.innerHTML = `
       <img src="${item.image}"
@@ -281,6 +307,9 @@ function renderGallery() {
 
     masonry.appendChild(el);
   });
+
+  // Show landscape items by default
+  switchGalleryTab('landscape');
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -443,11 +472,20 @@ function updateLightboxContent() {
   const items = lightboxItems();
   const item = items[lightboxIndex];
   const img = document.getElementById('lightbox-image');
+  const downloadBtn = document.getElementById('lightbox-download');
 
   img.src = item.image;
   img.alt = `${item.captionVi} — ${item.captionEn}`;
   document.getElementById('lightbox-caption-vi').textContent = item.captionVi;
   document.getElementById('lightbox-caption-en').textContent = item.captionEn;
+
+  // Wire download button to current image
+  if (downloadBtn) {
+    downloadBtn.href = item.image;
+    // Derive a clean filename from the image path
+    const filename = item.image.split('/').pop() || `quan-ho-${lightboxIndex + 1}.jpg`;
+    downloadBtn.setAttribute('download', filename);
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -571,4 +609,31 @@ function escapeHTML(str) {
   const div = document.createElement('div');
   div.textContent = str;
   return div.innerHTML;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// GALLERY TAB SWITCHER (Landscape / Portrait)
+// ═══════════════════════════════════════════════════════════════
+
+function switchGalleryTab(mode) {
+  const masonry = document.getElementById('gallery-masonry');
+  const btnLandscape = document.getElementById('tab-landscape');
+  const btnPortrait = document.getElementById('tab-portrait');
+
+  if (!masonry) return;
+  masonry.dataset.mode = mode;
+
+  if (mode === 'landscape') {
+    btnLandscape.className = 'btn btn-primary';
+    btnPortrait.className = 'btn btn-outline';
+    masonry.querySelectorAll('.gallery-item').forEach(el => {
+      el.style.display = el.dataset.orientation === 'landscape' ? '' : 'none';
+    });
+  } else {
+    btnPortrait.className = 'btn btn-primary';
+    btnLandscape.className = 'btn btn-outline';
+    masonry.querySelectorAll('.gallery-item').forEach(el => {
+      el.style.display = el.dataset.orientation === 'portrait' ? '' : 'none';
+    });
+  }
 }
