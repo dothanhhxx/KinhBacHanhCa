@@ -67,11 +67,11 @@
 
     <!-- ── SECTION 1: HERO ───────────────────────────────────── -->
     <section class="hero" id="hero" aria-label="Hero">
-      <div class="hero-bg" id="hero-bg" style="background-image: url('images/hero_museum.png');" role="img"
-        aria-label="Bảo tàng Lịch sử Quân sự Việt Nam"></div>
+      <div class="hero-bg" id="hero-bg" style="background-image: url('images/theatre_exterior.png');" role="img"
+        aria-label="Nhà hát Dân ca Quan họ Bắc Ninh"></div>
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <span class="hero-label fade-in-up">Est. 1956 · Hà Nội, Việt Nam</span>
+        <span class="hero-label fade-in-up">Bắc Ninh, Việt Nam</span>
         <h1 class="hero-title fade-in-up" style="transition-delay: 80ms;">
           DÂN CA QUAN HỌ<br>BẮC NINH
         </h1>
@@ -79,7 +79,7 @@
           Kinh Bắc Hành Ca
         </p>
         <p class="hero-tagline fade-in-up" style="transition-delay: 240ms;">
-          Khám phá hành trình dựng nước và giữ nước của Việt Nam qua các hiện vật lịch sử và triển lãm sống động.
+          Khám phá vẻ đẹp di sản văn hóa phi vật thể đại diện của nhân loại qua những làn điệu dân ca mộc mạc, đậm tình.
         </p>
         <div class="hero-buttons fade-in-up" style="transition-delay: 320ms;">
           <a href="#periods" class="btn btn-primary" id="cta-explore">
@@ -255,12 +255,29 @@
           <div class="section-divider"></div>
         </div>
         <!-- Gallery tabs: Landscape / Portrait -->
-        <div class="gallery-tabs" id="gallery-tabs" style="display:flex; gap: var(--space-3); margin-bottom: var(--space-6);">
+        <div class="gallery-tabs" id="gallery-tabs">
           <button class="btn btn-primary" id="tab-landscape" onclick="switchGalleryTab('landscape')">📷 Ảnh ngang — Landscape</button>
           <button class="btn btn-outline" id="tab-portrait" onclick="switchGalleryTab('portrait')">📸 Ảnh dọc — Portrait</button>
         </div>
+        <!-- Tabbed grid -->
         <div class="gallery-masonry" id="gallery-masonry" data-mode="landscape">
           <!-- Rendered by JS from MUSEUM_DATA.gallery -->
+        </div>
+
+        <!-- ── FULL CAROUSEL SLIDER ─────────────────────────── -->
+        <div class="gallery-carousel-wrap fade-in-up" style="margin-top: var(--space-16);">
+          <div class="carousel-header">
+            <span class="label-mono">Tất cả ảnh · All Photos</span>
+            <div class="carousel-controls">
+              <button class="carousel-btn" id="carousel-prev" aria-label="Ảnh trước">&#8249;</button>
+              <button class="carousel-btn" id="carousel-next" aria-label="Ảnh tiếp">&#8250;</button>
+            </div>
+          </div>
+          <div class="gallery-carousel" id="gallery-carousel" role="region" aria-label="Vòng lặp ảnh">
+            <div class="carousel-track" id="carousel-track">
+              <!-- Rendered by JS (cloned for infinite loop) -->
+            </div>
+          </div>
         </div>
       </div>
     </section>

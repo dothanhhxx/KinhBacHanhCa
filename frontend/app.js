@@ -284,11 +284,16 @@ function renderGallery() {
     el.dataset.galleryIndex = i;
     el.dataset.orientation = orientation;
 
+    // Correct aspect ratio per orientation
+    const w = orientation === 'portrait' ? 9 : 16;
+    const h = orientation === 'portrait' ? 16 : 9;
+
     el.innerHTML = `
       <img src="${item.image}"
            alt="${item.captionVi} — ${item.captionEn}"
            loading="lazy"
-           width="400" height="300">
+           width="${w * 50}" height="${h * 50}"
+           style="width:100%; height:100%; object-fit:cover; display:block;">
       <div class="gallery-item-overlay">
         <div>
           <div class="caption-vi">${item.captionVi}</div>
@@ -310,6 +315,115 @@ function renderGallery() {
 
   // Show landscape items by default
   switchGalleryTab('landscape');
+
+  // Build carousel
+  renderCarousel();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// GALLERY CAROUSEL — infinite loop, shows 3 at once
+// ═══════════════════════════════════════════════════════════════
+
+function renderCarousel() {
+  const track = document.getElementById('carousel-track');
+  const prevBtn = document.getElementById('carousel-prev');
+  const nextBtn = document.getElementById('carousel-next');
+  if (!track || !prevBtn || !nextBtn) return;
+
+  const items = MUSEUM_DATA.gallery;
+  if (!items || items.length === 0) return;
+
+  // Clone items for seamless infinite loop (original + 2 clones on each side)
+  const allItems = [...items, ...items, ...items]; // triple: end, original, start clones
+
+  allItems.forEach((item, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'carousel-slide';
+    slide.innerHTML = `
+      <img src="${item.image}"
+           alt="${item.captionVi}"
+           loading="lazy"
+           draggable="false">
+      <div class="carousel-slide-caption">
+        <span class="caption-vi">${item.captionVi}</span>
+        <span class="caption-en">${item.captionEn}</span>
+      </div>
+    `;
+    slide.addEventListener('click', () => openLightbox(i % items.length));
+    track.appendChild(slide);
+  });
+
+  const total = items.length;
+  let current = total; // start at the "original" set (index = total, after first clone)
+  let isTransitioning = false;
+
+  function getSlideWidth() {
+    const slide = track.querySelector('.carousel-slide');
+    if (!slide) return 0;
+    const gap = 16;
+    return slide.offsetWidth + gap;
+  }
+
+  function goTo(index, animated = true) {
+    if (animated) {
+      track.style.transition = 'transform 0.55s cubic-bezier(0.4,0,0.2,1)';
+      isTransitioning = true;
+    } else {
+      track.style.transition = 'none';
+    }
+    const slideW = getSlideWidth();
+    track.style.transform = `translateX(-${index * slideW}px)`;
+    current = index;
+  }
+
+  // Position initially (no animation)
+  goTo(current, false);
+
+  // After transition: jump to real set if we hit the clones
+  track.addEventListener('transitionend', () => {
+    isTransitioning = false;
+    if (current >= total * 2) {
+      goTo(total, false);
+    } else if (current < total) {
+      goTo(total * 2 - total, false);
+    }
+  });
+
+  prevBtn.addEventListener('click', () => {
+    if (isTransitioning) return;
+    goTo(current - 1);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (isTransitioning) return;
+    goTo(current + 1);
+  });
+
+  // Keyboard
+  document.getElementById('gallery-carousel')?.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') prevBtn.click();
+    if (e.key === 'ArrowRight') nextBtn.click();
+  });
+
+  // Touch/swipe
+  let touchStartX = 0;
+  const carousel = document.getElementById('gallery-carousel');
+  carousel?.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  carousel?.addEventListener('touchend', e => {
+    const dx = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 40) dx > 0 ? nextBtn.click() : prevBtn.click();
+  });
+
+  // Auto-advance every 4s
+  let autoTimer = setInterval(() => nextBtn.click(), 4000);
+  carousel?.addEventListener('mouseenter', () => clearInterval(autoTimer));
+  carousel?.addEventListener('mouseleave', () => {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => nextBtn.click(), 4000);
+  });
+
+  // Recalculate on resize
+  window.addEventListener('resize', () => goTo(current, false));
 }
 
 // ═══════════════════════════════════════════════════════════════

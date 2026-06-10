@@ -875,15 +875,32 @@ ul, ol {
   margin-top: var(--space-3);
 }
 
-/* ── GALLERY (Masonry) ─────────────────────────────────────── */
+/* ── GALLERY TABS ──────────────────────────────────────────── */
+.gallery-tabs {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+}
+
+/* ── GALLERY GRID (Landscape / Portrait tabs) ──────────────── */
 .gallery-masonry {
-  column-count: 3;
-  column-gap: var(--space-6);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+
+/* Landscape items: 16/9 */
+.gallery-item[data-orientation="landscape"] {
+  aspect-ratio: 16 / 9;
+}
+
+/* Portrait items: 9/16 */
+.gallery-item[data-orientation="portrait"] {
+  aspect-ratio: 9 / 16;
 }
 
 .gallery-item {
   break-inside: avoid;
-  margin-bottom: var(--space-6);
   border-radius: var(--radius-lg);
   overflow: hidden;
   position: relative;
@@ -902,7 +919,9 @@ ul, ol {
 
 .gallery-item img {
   width: 100%;
+  height: 100%;
   display: block;
+  object-fit: cover;
   transition: transform var(--duration-slow) var(--ease-out);
 }
 
@@ -936,6 +955,132 @@ ul, ol {
   font-size: var(--text-sm);
   color: rgba(255,255,255,0.7);
   font-style: italic;
+}
+
+/* ── GALLERY CAROUSEL ──────────────────────────────────────── */
+.gallery-carousel-wrap {
+  width: 100%;
+}
+
+.carousel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-5);
+}
+
+.carousel-controls {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.carousel-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--text-2xl);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--duration-fast), border-color var(--duration-fast), color var(--duration-fast);
+}
+
+.carousel-btn:hover {
+  background: var(--color-dark);
+  border-color: var(--color-dark);
+  color: white;
+}
+
+.gallery-carousel {
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  width: 100%;
+  cursor: grab;
+}
+
+.gallery-carousel:active {
+  cursor: grabbing;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 16px;
+  will-change: transform;
+  user-select: none;
+}
+
+.carousel-slide {
+  flex: 0 0 calc((100% - 32px) / 3);
+  min-width: calc((100% - 32px) / 3);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--color-surface);
+  cursor: pointer;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+
+.carousel-slide:hover img {
+  transform: scale(1.06);
+}
+
+.carousel-slide-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.72));
+  padding: var(--space-6) var(--space-4) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.carousel-slide-caption .caption-vi {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: white;
+}
+
+.carousel-slide-caption .caption-en {
+  font-size: var(--text-xs);
+  color: rgba(255,255,255,0.65);
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .carousel-slide {
+    flex: 0 0 calc((100% - 16px) / 2);
+    min-width: calc((100% - 16px) / 2);
+  }
+  .gallery-masonry {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-slide {
+    flex: 0 0 88%;
+    min-width: 88%;
+  }
+  .gallery-masonry {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ── LIGHTBOX MODAL ────────────────────────────────────────── */
