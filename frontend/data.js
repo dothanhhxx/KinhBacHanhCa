@@ -1,0 +1,94 @@
+const MUSEUM_DATA = {
+  "meta": {
+    "titleVi": "Nhà hát Dân ca Quan họ Bắc Ninh",
+    "titleEn": "Bac Ninh Quan Ho Folk Song Theatre",
+    "taglineVi": "Bảo tồn, phát huy và quảng bá nghệ thuật Dân ca Quan họ — di sản văn hóa phi vật thể đại diện của nhân loại.",
+    "taglineEn": "Preserving and promoting Quan Ho Bac Ninh Folk Songs — UNESCO Intangible Cultural Heritage of Humanity.",
+    "address": "Kinh Bắc, Bắc Ninh",
+    "phone": "0337288124",
+    "email": "info@nhdcqhbn.vn",
+    "hours": {
+      "vi": "Thứ 2 – Thứ 7: 8:00 – 17:00",
+      "en": "Mon – Sat: 8:00 AM – 5:00 PM"
+    }
+  },
+  "nav": [
+    { "id": "about", "labelVi": "Giới thiệu", "labelEn": "About" },
+    { "id": "periods", "labelVi": "Lịch sử", "labelEn": "History" },
+    { "id": "timeline", "labelVi": "Niên biểu", "labelEn": "Timeline" },
+    { "id": "gallery", "labelVi": "Hiện vật", "labelEn": "Artifacts" },
+    { "id": "videos", "labelVi": "Video", "labelEn": "Videos" }
+  ],
+  "about": {
+    "titleVi": "Về Nhà hát",
+    "titleEn": "About the Theatre",
+    "contentVi": "Nhà hát Dân ca Quan họ Bắc Ninh là một công trình văn hóa tiêu biểu của tỉnh Bắc Ninh, được xây dựng nhằm bảo tồn, phát huy và quảng bá nghệ thuật Dân ca Quan họ - di sản văn hóa phi vật thể đại diện của nhân loại được UNESCO công nhận vào năm 2009. Những làn điệu Quan họ cổ được thể hiện qua tiếng hát của các liền anh, liền chị không chỉ góp phần giữ gìn nét đẹp văn hóa truyền thống mà còn giúp quảng bá hình ảnh Bắc Ninh đến với bạn bè quốc tế.",
+    "contentEn": "Home to the UNESCO-recognized Quan Ho Bac Ninh Folk Songs, the Bac Ninh Quan Ho Folk Song Theatre is where tradition comes alive through music, performance, and cultural storytelling. Echoing through the graceful voices of liền anh and liền chị, timeless Quan Ho melodies embody the beauty and spirit of Vietnam's cultural heritage. As a vibrant cultural destination, the theatre welcomes visitors from around the world to discover the unique identity of Bac Ninh and experience one of Vietnam's most treasured artistic traditions.",
+    "image": "images/theatre_exterior.png",
+    "stats": [
+      { "value": "19,400 m²", "labelVi": "Diện tích", "labelEn": "Area" },
+      { "value": "> 240 tỷ", "labelVi": "Tổng mức đầu tư", "labelEn": "Total Investment" },
+      { "value": "1969", "labelVi": "Năm thành lập", "labelEn": "Year Established" },
+      { "value": "2020", "labelVi": "Hoàn thành xây dựng", "labelEn": "Completion Year" }
+    ]
+  },
+  "periods": [
+    {
+      "id": "era-1",
+      "titleVi": "Ban Lãnh đạo",
+      "titleEn": "The Leadership",
+      "years": "Lãnh đạo",
+      "descVi": "Ông Phạm Văn Thắng - Giám Đốc Nhà hát | Ông Lương Trung Kiên - Phó Giám đốc | Bà Nguyễn Thị Hương Giang - Phó Giám đốc | Bà Nguyễn Thị Quý - Phó Giám đốc",
+      "descEn": "Mr. Pham Van Thang - Director of the Theatre | Mr. Luong Trung Kien - Vice Director | Ms. Nguyen Thi Huong Giang - Vice Director | Ms. Nguyen Thi Quy - Vice Director",
+      "artifacts": [
+        { "image": "images/director_avatar.png", "captionVi": "Ông Phạm Văn Thắng — Giám Đốc", "captionEn": "Mr. Pham Van Thang — Director" },
+        { "image": "images/director_avatar.png", "captionVi": "Ông Lương Trung Kiên — Phó GĐ", "captionEn": "Mr. Luong Trung Kien — Vice Director" }
+      ]
+    },
+    {
+      "id": "era-2",
+      "titleVi": "Các Nghệ sĩ Tiêu biểu",
+      "titleEn": "Distinguished Artists",
+      "years": "Nghệ sĩ",
+      "descVi": "Nhà hát quy tụ nhiều nghệ sĩ tài năng, tiêu biểu như: NSND Thúy Cải, NSND Thúy Hường, NSƯT Khánh Hạ, NSƯT Lan Hương, NSƯT Hải Xuân, NSƯT Xuân Mùi, NSƯT Quang Vinh, NSƯT Lệ Ngải, NSƯT Hồng Mạnh, NSƯT Lệ Thanh, v.v...",
+      "descEn": "The Theatre is home to many renowned artists who have made significant contributions to the preservation and promotion of Quan Ho Bac Ninh Folk Songs, including People's Artists Thuy Cai and Thuy Huong, as well as Meritorious Artists Khanh Ha, Lan Huong, Hai Xuan, Xuan Mui, Quang Vinh, Le Ngai, Hong Manh, Le Thanh, and many others.",
+      "artifacts": [
+        { "image": "images/artist_avatar.png", "captionVi": "NSND Thúy Cải & NSND Thúy Hường", "captionEn": "People's Artists Thuy Cai & Thuy Huong" },
+        { "image": "images/quan_ho_performance.png", "captionVi": "Các NSƯT tiêu biểu", "captionEn": "Distinguished Meritorious Artists" }
+      ]
+    }
+  ],
+  "timeline": [
+    { "year": "1968", "titleVi": "Khởi đầu", "titleEn": "Foundation", "descVi": "Khởi đầu xây dựng Đội hát Quan họ.", "descEn": "Foundation of the Quan Ho Singing Team." },
+    { "year": "1969", "titleVi": "Thành lập Đoàn", "titleEn": "Establishment", "descVi": "Thành lập Đoàn Dân ca Quan họ Hà Bắc.", "descEn": "Establishment of the Ha Bac Quan Ho Folk Song Troupe." },
+    { "year": "1974", "titleVi": "Sưu tầm & Bảo tồn", "titleEn": "Preservation", "descVi": "Sưu tầm 250 bài hát, 500 lời ca tại 24 làng Quan họ.", "descEn": "Preservation and collection of 250 traditional songs and 500 folk lyrics across 24 Quan Ho villages." },
+    { "year": "1997", "titleVi": "Giai đoạn mới", "titleEn": "New Chapter", "descVi": "Bước vào giai đoạn phát triển mới cùng tỉnh Bắc Ninh.", "descEn": "A new chapter of development following the re-establishment of Bac Ninh Province." },
+    { "year": "2009", "titleVi": "UNESCO Ghi danh", "titleEn": "UNESCO Recognition", "descVi": "Dân ca Quan họ Bắc Ninh được UNESCO ghi danh là Di sản văn hóa phi vật thể đại diện của nhân loại.", "descEn": "Quan Ho Bac Ninh Folk Songs recognized by UNESCO as an Intangible Cultural Heritage of Humanity." },
+    { "year": "2011", "titleVi": "Thành lập Nhà hát", "titleEn": "Theatre Established", "descVi": "UBND tỉnh Bắc Ninh ban hành Quyết định thành lập Nhà hát Dân ca Quan họ Bắc Ninh.", "descEn": "Official establishment of the Bac Ninh Quan Ho Folk Song Theatre by decision of the Bac Ninh Provincial People's Committee." },
+    { "year": "2016", "titleVi": "Khởi công xây dựng", "titleEn": "Construction Begins", "descVi": "Khởi công xây dựng Nhà hát Dân ca Quan họ Bắc Ninh.", "descEn": "Commencement of construction of the Bac Ninh Quan Ho Folk Song Theatre." },
+    { "year": "2020", "titleVi": "Hoàn thành xây dựng", "titleEn": "Completion", "descVi": "Hoàn thành và khánh thành Nhà hát Dân ca Quan họ Bắc Ninh.", "descEn": "Completion and inauguration of the Bac Ninh Quan Ho Folk Song Theatre." }
+  ],
+  "gallery": [
+    { "image": "images/quan_ho_artifacts.png",  "captionVi": "Nón quai thao và nhạc cụ dân tộc",   "captionEn": "Nón Quai Thao and Traditional Instruments", "era": "era-1", "orientation": "landscape" },
+    { "image": "images/quan_ho_performance.png", "captionVi": "Biểu diễn Dân ca Quan họ trên sân khấu", "captionEn": "Quan Ho Folk Singing Stage Performance",   "era": "era-1", "orientation": "landscape" },
+    { "image": "images/theatre_exterior.png",    "captionVi": "Toàn cảnh Nhà hát về đêm",            "captionEn": "Theatre Panorama at Dusk",              "era": "era-2", "orientation": "landscape" },
+    { "image": "images/artist_avatar.png",       "captionVi": "Chân dung Liền chị truyền thống",     "captionEn": "Portrait of a Traditional Liền Chị",   "era": "era-2", "orientation": "portrait" },
+    { "image": "images/director_avatar.png",     "captionVi": "Chân dung Nghệ sĩ Quan họ",           "captionEn": "Portrait of a Quan Ho Artist",         "era": "era-3", "orientation": "portrait" },
+    { "image": "images/quan_ho_history.png",     "captionVi": "Tư liệu biểu diễn Quan họ xưa",       "captionEn": "Historical Quan Ho Performance Archive","era": "era-3", "orientation": "portrait" }
+  ],
+  "videos": {
+    "interviews": [
+      { "id": "v1", "titleVi": "GS. Nguyễn Văn Minh", "titleEn": "Prof. Nguyen Van Minh", "role": "Nhà sử học — Historian" },
+      { "id": "v2", "titleVi": "Đại tá Trần Quốc Hùng", "titleEn": "Col. Tran Quoc Hung", "role": "Cựu chiến binh — Veteran" },
+      { "id": "v3", "titleVi": "Sinh viên Lê Thị Hoa", "titleEn": "Student Le Thi Hoa", "role": "Sinh viên — Student" },
+      { "id": "v4", "titleVi": "Nguyễn Thanh Tùng", "titleEn": "Nguyen Thanh Tung", "role": "Hướng dẫn viên — Guide" }
+    ],
+    "featured": {
+      "titleVi": "Hành trình qua lịch sử",
+      "titleEn": "A Journey Through History",
+      "descVi": "Phim tài liệu về hành trình dựng nước và giữ nước của dân tộc Việt Nam",
+      "descEn": "A documentary about the journey of nation-building and defense of the Vietnamese people"
+    }
+  },
+  "testimonials": []
+};

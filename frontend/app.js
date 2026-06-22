@@ -3,14 +3,10 @@
 // Dynamic rendering, scroll animations, lightbox, chat widget
 // ============================================================
 
-let MUSEUM_DATA = {};
+// MUSEUM_DATA is now loaded from data.js
 
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
   try {
-    const response = await fetch('data.json');
-    if (!response.ok) throw new Error('Network response was not ok');
-    MUSEUM_DATA = await response.json();
-    
     initNavigation();
     initHeroParallax();
     renderAbout();
@@ -18,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderTimeline();
     renderGallery();
     renderVideos();
-    renderTestimonials();
+    // renderTestimonials(); // Section removed
     initScrollAnimations();
     initLightbox();
     initAIChat();
@@ -31,8 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
     }, 100);
   } catch (error) {
-    console.error('Failed to load museum data:', error);
-    document.body.innerHTML = '<h1 style="text-align:center; padding:50px;">Lỗi tải dữ liệu / Failed to load data. Vui lòng chạy trên localhost.</h1>';
+    console.error('Lỗi khi khởi tạo ứng dụng:', error);
   }
 });
 
