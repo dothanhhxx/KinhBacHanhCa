@@ -514,10 +514,15 @@ function initLightbox() {
   const closeBtn = document.getElementById('lightbox-close');
   const prevBtn = document.getElementById('lightbox-prev');
   const nextBtn = document.getElementById('lightbox-next');
+  const infoBtn = document.getElementById('lightbox-info-btn');
 
   closeBtn.addEventListener('click', closeLightbox);
   prevBtn.addEventListener('click', () => navigateLightbox(-1));
   nextBtn.addEventListener('click', () => navigateLightbox(1));
+  infoBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    document.getElementById('lightbox-info-panel').classList.toggle('active');
+  });
 
   // Click backdrop to close
   lightbox.addEventListener('click', e => {
@@ -548,6 +553,7 @@ function closeLightbox() {
   const lightbox = document.getElementById('lightbox');
   lightbox.classList.remove('active');
   document.body.style.overflow = '';
+  document.getElementById('lightbox-info-panel').classList.remove('active');
 }
 
 function navigateLightbox(direction) {
@@ -567,11 +573,43 @@ function updateLightboxContent() {
   document.getElementById('lightbox-caption-vi').textContent = item.captionVi;
   document.getElementById('lightbox-caption-en').textContent = item.captionEn;
 
+  // Render info panel contents on load to get real dimensions
+  const filename = item.image.split('/').pop() || `quan-ho-${lightboxIndex + 1}.jpg`;
+  document.getElementById('lightbox-metadata').innerHTML = '<div style="text-align:center; padding: 10px;">Đang tải thông số...</div>';
+  
+  img.onload = () => {
+    const w = img.naturalWidth;
+    const h = img.naturalHeight;
+    const ratio = (w && h) ? (w/h).toFixed(2) : 'N/A';
+    const fmt = filename.split('.').pop().toUpperCase();
+    
+    document.getElementById('lightbox-metadata').innerHTML = `
+      <div class="metadata-row">
+        <span class="metadata-label">File</span>
+        <span class="metadata-value">${filename}</span>
+      </div>
+      <div class="metadata-row">
+        <span class="metadata-label">Định dạng</span>
+        <span class="metadata-value">${fmt}</span>
+      </div>
+      <div class="metadata-row">
+        <span class="metadata-label">Kích thước</span>
+        <span class="metadata-value">${w} × ${h} px</span>
+      </div>
+      <div class="metadata-row">
+        <span class="metadata-label">Tỷ lệ (Ratio)</span>
+        <span class="metadata-value">${ratio}</span>
+      </div>
+      <div class="metadata-row">
+        <span class="metadata-label">Khung hình</span>
+        <span class="metadata-value" style="text-transform: capitalize;">${item.orientation === 'landscape' ? 'Ngang (Landscape)' : 'Dọc (Portrait)'}</span>
+      </div>
+    `;
+  };
+
   // Wire download button to current image
   if (downloadBtn) {
     downloadBtn.href = item.image;
-    // Derive a clean filename from the image path
-    const filename = item.image.split('/').pop() || `quan-ho-${lightboxIndex + 1}.jpg`;
     downloadBtn.setAttribute('download', filename);
   }
 }

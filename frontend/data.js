@@ -70,345 +70,268 @@ const MUSEUM_DATA = {
   ],
   "gallery": [
     {
-      "image": "images/Ảnh Landscape/10.JPG",
-      "captionVi": "10",
-      "captionEn": "10",
-      "era": "era-1",
-      "orientation": "landscape"
-    },
-    {
-      "image": "images/Ảnh Landscape/11.JPG",
-      "captionVi": "11",
-      "captionEn": "11",
-      "era": "era-1",
-      "orientation": "landscape"
-    },
-    {
-      "image": "images/Ảnh Landscape/12.JPG",
-      "captionVi": "12",
-      "captionEn": "12",
-      "era": "era-1",
-      "orientation": "landscape"
-    },
-    {
-      "image": "images/Ảnh Landscape/15.JPG",
-      "captionVi": "15",
-      "captionEn": "15",
-      "era": "era-1",
-      "orientation": "landscape"
-    },
-    {
       "image": "images/Ảnh Landscape/18.jpg",
-      "captionVi": "18",
-      "captionEn": "18",
+      "captionVi": "Biểu diễn Quan họ",
+      "captionEn": "Quan Ho Performance",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/19.JPG",
-      "captionVi": "19",
-      "captionEn": "19",
-      "era": "era-1",
-      "orientation": "landscape"
-    },
-    {
-      "image": "images/Ảnh Landscape/20.JPG",
-      "captionVi": "20",
-      "captionEn": "20",
-      "era": "era-1",
-      "orientation": "landscape"
-    },
-    {
-      "image": "images/Ảnh Landscape/3.jpg",
-      "captionVi": "3",
-      "captionEn": "3",
+      "captionVi": "Không gian trình diễn",
+      "captionEn": "Performance Space",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/4.JPG",
-      "captionVi": "4",
-      "captionEn": "4",
-      "era": "era-1",
-      "orientation": "landscape"
-    },
-    {
-      "image": "images/Ảnh Landscape/5.jpg",
-      "captionVi": "5",
-      "captionEn": "5",
+      "captionVi": "Liền anh liền chị Quan họ",
+      "captionEn": "Quan Ho Performers",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/6.jpg",
-      "captionVi": "6",
-      "captionEn": "6",
-      "era": "era-1",
-      "orientation": "landscape"
-    },
-    {
-      "image": "images/Ảnh Landscape/8.JPG",
-      "captionVi": "8",
-      "captionEn": "8",
-      "era": "era-1",
-      "orientation": "landscape"
-    },
-    {
-      "image": "images/Ảnh Landscape/9.JPG",
-      "captionVi": "9",
-      "captionEn": "9",
+      "captionVi": "Hát Quan họ truyền thống",
+      "captionEn": "Traditional Quan Ho Singing",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/Hiện vật trưng bày tại sảnh (1).JPG",
-      "captionVi": "Hiện vật trưng bày tại sảnh (1)",
-      "captionEn": "Hiện vật trưng bày tại sảnh (1)",
+      "captionVi": "Hiện vật trưng bày tại sảnh",
+      "captionEn": "Exhibition Artifacts in the Hall",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/Hiện vật trưng bày tại sảnh (10).JPG",
-      "captionVi": "Hiện vật trưng bày tại sảnh (10)",
-      "captionEn": "Hiện vật trưng bày tại sảnh (10)",
+      "captionVi": "Hiện vật trưng bày tại sảnh",
+      "captionEn": "Exhibition Artifacts in the Hall",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/Hiện vật trưng bày tại sảnh (11).JPG",
-      "captionVi": "Hiện vật trưng bày tại sảnh (11)",
-      "captionEn": "Hiện vật trưng bày tại sảnh (11)",
+      "captionVi": "Hiện vật trưng bày tại sảnh",
+      "captionEn": "Exhibition Artifacts in the Hall",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/Hiện vật trưng bày tại sảnh (4).JPG",
-      "captionVi": "Hiện vật trưng bày tại sảnh (4)",
-      "captionEn": "Hiện vật trưng bày tại sảnh (4)",
+      "captionVi": "Hiện vật trưng bày tại sảnh",
+      "captionEn": "Exhibition Artifacts in the Hall",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/Hiện vật trưng bày tại sảnh (6).JPG",
-      "captionVi": "Hiện vật trưng bày tại sảnh (6)",
-      "captionEn": "Hiện vật trưng bày tại sảnh (6)",
+      "captionVi": "Hiện vật trưng bày tại sảnh",
+      "captionEn": "Exhibition Artifacts in the Hall",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/Hiện vật trưng bày tại sảnh (7).JPG",
-      "captionVi": "Hiện vật trưng bày tại sảnh (7)",
-      "captionEn": "Hiện vật trưng bày tại sảnh (7)",
+      "captionVi": "Hiện vật trưng bày tại sảnh",
+      "captionEn": "Exhibition Artifacts in the Hall",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/Hiện vật trưng bày tại sảnh (8).JPG",
-      "captionVi": "Hiện vật trưng bày tại sảnh (8)",
-      "captionEn": "Hiện vật trưng bày tại sảnh (8)",
+      "captionVi": "Hiện vật trưng bày tại sảnh",
+      "captionEn": "Exhibition Artifacts in the Hall",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/Hiện vật trưng bày tại sảnh (9).JPG",
-      "captionVi": "Hiện vật trưng bày tại sảnh (9)",
-      "captionEn": "Hiện vật trưng bày tại sảnh (9)",
+      "captionVi": "Hiện vật trưng bày tại sảnh",
+      "captionEn": "Exhibition Artifacts in the Hall",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/IMG_4564.JPG",
-      "captionVi": "IMG_4564",
-      "captionEn": "IMG_4564",
+      "captionVi": "Biểu diễn Quan họ",
+      "captionEn": "Quan Ho Performance",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/IMG_4566.JPG",
-      "captionVi": "IMG_4566",
-      "captionEn": "IMG_4566",
+      "captionVi": "Biểu diễn Quan họ",
+      "captionEn": "Quan Ho Performance",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/IMG_4569.JPG",
-      "captionVi": "IMG_4569",
-      "captionEn": "IMG_4569",
-      "era": "era-1",
-      "orientation": "landscape"
-    },
-    {
-      "image": "images/Ảnh Landscape/IMG_8750.JPG",
-      "captionVi": "IMG_8750",
-      "captionEn": "IMG_8750",
+      "captionVi": "Biểu diễn Quan họ",
+      "captionEn": "Quan Ho Performance",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/IMG_8760.JPG",
-      "captionVi": "IMG_8760",
-      "captionEn": "IMG_8760",
+      "captionVi": "Hình ảnh báo chí",
+      "captionEn": "Press Photography",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/IMG_8832.JPG",
-      "captionVi": "IMG_8832",
-      "captionEn": "IMG_8832",
+      "captionVi": "Hình ảnh báo chí",
+      "captionEn": "Press Photography",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/IMG_8852.JPG",
-      "captionVi": "IMG_8852",
-      "captionEn": "IMG_8852",
+      "captionVi": "Hình ảnh báo chí",
+      "captionEn": "Press Photography",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/Liền anh xướng câu Quan họ.JPG",
       "captionVi": "Liền anh xướng câu Quan họ",
-      "captionEn": "Liền anh xướng câu Quan họ",
+      "captionEn": "Lien Anh Sings Quan Ho Melodies",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/Người lái đò.jpg",
       "captionVi": "Người lái đò",
-      "captionEn": "Người lái đò",
-      "era": "era-1",
-      "orientation": "landscape"
-    },
-    {
-      "image": "images/Ảnh Landscape/NS Thanh Quý 2.jpg",
-      "captionVi": "NS Thanh Quý 2",
-      "captionEn": "NS Thanh Quý 2",
+      "captionEn": "The Ferryman",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/NS Thanh Quý 6.jpg",
-      "captionVi": "NS Thanh Quý 6",
-      "captionEn": "NS Thanh Quý 6",
-      "era": "era-1",
-      "orientation": "landscape"
-    },
-    {
-      "image": "images/Ảnh Landscape/NS Thanh Quý 9.jpg",
-      "captionVi": "NS Thanh Quý 9",
-      "captionEn": "NS Thanh Quý 9",
+      "captionVi": "Nghệ sĩ Thanh Quý",
+      "captionEn": "Artist Thanh Quy",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/Song ca liền anh.JPG",
       "captionVi": "Song ca liền anh",
-      "captionEn": "Song ca liền anh",
+      "captionEn": "Duet of Lien Anh",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/Toàn cảnh Nhà hát và tốp hát trên thuyền (góc rộng).jpg",
-      "captionVi": "Toàn cảnh Nhà hát và tốp hát trên thuyền (góc rộng)",
-      "captionEn": "Toàn cảnh Nhà hát và tốp hát trên thuyền (góc rộng)",
-      "era": "era-1",
-      "orientation": "landscape"
-    },
-    {
-      "image": "images/Ảnh Landscape/Toàn cảnh Nhà hát và tốp hát trên thuyền (góc rộng, thuyền ở góc trái).jpg",
-      "captionVi": "Toàn cảnh Nhà hát và tốp hát trên thuyền (góc rộng, thuyền ở góc trái)",
-      "captionEn": "Toàn cảnh Nhà hát và tốp hát trên thuyền (góc rộng, thuyền ở góc trái)",
-      "era": "era-1",
-      "orientation": "landscape"
-    },
-    {
-      "image": "images/Ảnh Landscape/Toàn cảnh Nhà hát và tốp hát trên thuyền.JPG",
       "captionVi": "Toàn cảnh Nhà hát và tốp hát trên thuyền",
-      "captionEn": "Toàn cảnh Nhà hát và tốp hát trên thuyền",
+      "captionEn": "Theatre Panorama & Boat Singers",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/Trong sảnh (2).JPG",
-      "captionVi": "Trong sảnh (2)",
-      "captionEn": "Trong sảnh (2)",
+      "captionVi": "Không gian trong sảnh Nhà hát",
+      "captionEn": "Theatre Hall Interior",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/Trong sảnh (5).JPG",
-      "captionVi": "Trong sảnh (5)",
-      "captionEn": "Trong sảnh (5)",
-      "era": "era-1",
-      "orientation": "landscape"
-    },
-    {
-      "image": "images/Ảnh Landscape/Tốp hát nam - nữ trên thuyền.jpg",
-      "captionVi": "Tốp hát nam - nữ trên thuyền",
-      "captionEn": "Tốp hát nam - nữ trên thuyền",
+      "captionVi": "Không gian trong sảnh Nhà hát",
+      "captionEn": "Theatre Hall Interior",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/Tốp tam ca liền chị.JPG",
       "captionVi": "Tốp tam ca liền chị",
-      "captionEn": "Tốp tam ca liền chị",
+      "captionEn": "Lien Chi Trio Performance",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/Đôi liền anh - liền chị.JPG",
       "captionVi": "Đôi liền anh - liền chị",
-      "captionEn": "Đôi liền anh - liền chị",
+      "captionEn": "Lien Anh & Lien Chi Duet",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
       "image": "images/Ảnh Landscape/Đôi nam - nữ.jpg",
       "captionVi": "Đôi nam - nữ",
-      "captionEn": "Đôi nam - nữ",
+      "captionEn": "Male & Female Duet",
       "era": "era-1",
       "orientation": "landscape"
     },
     {
-      "image": "images/Ảnh Portrait/4(Por).JPG",
-      "captionVi": "4(Por)",
-      "captionEn": "4(Por)",
+      "image": "images/Ảnh Portrait/12.JPG",
+      "captionVi": "Biểu diễn Quan họ",
+      "captionEn": "Quan Ho Performance",
       "era": "era-1",
       "orientation": "portrait"
     },
     {
-      "image": "images/Ảnh Portrait/5(Por).JPG",
-      "captionVi": "5(Por)",
-      "captionEn": "5(Por)",
+      "image": "images/Ảnh Portrait/15.JPG",
+      "captionVi": "Trang phục Quan họ truyền thống",
+      "captionEn": "Traditional Quan Ho Costume",
+      "era": "era-1",
+      "orientation": "portrait"
+    },
+    {
+      "image": "images/Ảnh Portrait/4(Por).JPG",
+      "captionVi": "Liền chị Quan họ",
+      "captionEn": "Lien Chi in Quan Ho Attire",
       "era": "era-1",
       "orientation": "portrait"
     },
     {
       "image": "images/Ảnh Portrait/8(Por).JPG",
-      "captionVi": "8(Por)",
-      "captionEn": "8(Por)",
+      "captionVi": "Biểu diễn nghệ thuật",
+      "captionEn": "Artistic Performance",
+      "era": "era-1",
+      "orientation": "portrait"
+    },
+    {
+      "image": "images/Ảnh Portrait/8.JPG",
+      "captionVi": "Biểu diễn nghệ thuật",
+      "captionEn": "Artistic Performance",
+      "era": "era-1",
+      "orientation": "portrait"
+    },
+    {
+      "image": "images/Ảnh Portrait/9.JPG",
+      "captionVi": "Không gian nghệ thuật",
+      "captionEn": "Artistic Space",
       "era": "era-1",
       "orientation": "portrait"
     },
     {
       "image": "images/Ảnh Portrait/Hiện vật trưng bày tại sảnh (14)(Por).JPG",
-      "captionVi": "Hiện vật trưng bày tại sảnh (14)(Por)",
-      "captionEn": "Hiện vật trưng bày tại sảnh (14)(Por)",
+      "captionVi": "Hiện vật trưng bày tại sảnh",
+      "captionEn": "Exhibition Artifacts in the Hall",
       "era": "era-1",
       "orientation": "portrait"
     },
     {
       "image": "images/Ảnh Portrait/Hiện vật trưng bày tại sảnh (5)(Por).JPG",
-      "captionVi": "Hiện vật trưng bày tại sảnh (5)(Por)",
-      "captionEn": "Hiện vật trưng bày tại sảnh (5)(Por)",
+      "captionVi": "Hiện vật trưng bày tại sảnh",
+      "captionEn": "Exhibition Artifacts in the Hall",
+      "era": "era-1",
+      "orientation": "portrait"
+    },
+    {
+      "image": "images/Ảnh Portrait/IMG_8750.JPG",
+      "captionVi": "Hình ảnh báo chí",
+      "captionEn": "Press Photography",
       "era": "era-1",
       "orientation": "portrait"
     },
     {
       "image": "images/Ảnh Portrait/NS Thanh Quý 1(Por).jpg",
-      "captionVi": "NS Thanh Quý 1(Por)",
-      "captionEn": "NS Thanh Quý 1(Por)",
+      "captionVi": "Nghệ sĩ Thanh Quý",
+      "captionEn": "Artist Thanh Quy",
       "era": "era-1",
       "orientation": "portrait"
     },
