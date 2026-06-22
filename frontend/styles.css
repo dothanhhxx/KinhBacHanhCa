@@ -900,10 +900,20 @@ ul, ol {
 }
 
 /* ── GALLERY TABS ──────────────────────────────────────────── */
+.tab-carousel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+}
+
 .gallery-tabs {
   display: flex;
   gap: var(--space-3);
-  margin-bottom: var(--space-8);
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 /* ── GALLERY GRID (Landscape / Portrait tabs) ──────────────── */
@@ -1044,9 +1054,22 @@ ul, ol {
   border-radius: var(--radius-lg);
   overflow: hidden;
   position: relative;
-  aspect-ratio: 4 / 3;
   background: var(--color-surface);
   cursor: pointer;
+}
+
+/* Landscape: 16:9 — 3 visible */
+.carousel-slide--landscape {
+  aspect-ratio: 16 / 9;
+  flex: 0 0 calc((100% - 32px) / 3);
+  min-width: calc((100% - 32px) / 3);
+}
+
+/* Portrait: 9:16 — 4 visible, narrower cards */
+.carousel-slide--portrait {
+  aspect-ratio: 9 / 16;
+  flex: 0 0 calc((100% - 48px) / 4);
+  min-width: calc((100% - 48px) / 4);
 }
 
 .carousel-slide img {
@@ -1088,22 +1111,26 @@ ul, ol {
 }
 
 @media (max-width: 768px) {
+  .carousel-slide--landscape {
+    flex: 0 0 calc((100% - 16px) / 2);
+    min-width: calc((100% - 16px) / 2);
+  }
+  .carousel-slide--portrait {
+    flex: 0 0 calc((100% - 16px) / 2);
+    min-width: calc((100% - 16px) / 2);
+  }
   .carousel-slide {
     flex: 0 0 calc((100% - 16px) / 2);
     min-width: calc((100% - 16px) / 2);
   }
-  .gallery-masonry {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media (max-width: 480px) {
+  .carousel-slide--landscape,
+  .carousel-slide--portrait,
   .carousel-slide {
     flex: 0 0 88%;
     min-width: 88%;
-  }
-  .gallery-masonry {
-    grid-template-columns: 1fr;
   }
 }
 

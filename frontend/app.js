@@ -262,78 +262,62 @@ function renderTimeline() {
 }
 
 // ═══════════════════════════════════════════════════════════════
-// RENDER GALLERY (Masonry)
+// RENDER GALLERY — initialises the tab carousel
 // ═══════════════════════════════════════════════════════════════
 
 function renderGallery() {
-  const masonry = document.getElementById('gallery-masonry');
-
-  MUSEUM_DATA.gallery.forEach((item, i) => {
-    const el = document.createElement('div');
-    const orientation = item.orientation || 'landscape';
-    el.className = 'gallery-item scale-in';
-    el.style.transitionDelay = `${i * 60}ms`;
-    el.setAttribute('tabindex', '0');
-    el.setAttribute('role', 'button');
-    el.setAttribute('aria-label', `Xem ${item.captionVi}`);
-    el.dataset.galleryIndex = i;
-    el.dataset.orientation = orientation;
-
-    // Correct aspect ratio per orientation
-    const w = orientation === 'portrait' ? 9 : 16;
-    const h = orientation === 'portrait' ? 16 : 9;
-
-    el.innerHTML = `
-      <img src="${item.image}"
-           alt="${item.captionVi} — ${item.captionEn}"
-           loading="lazy"
-           width="${w * 50}" height="${h * 50}"
-           style="width:100%; height:100%; object-fit:cover; display:block;">
-      <div class="gallery-item-overlay">
-        <div>
-          <div class="caption-vi">${item.captionVi}</div>
-          <div class="caption-en">${item.captionEn}</div>
-        </div>
-      </div>
-    `;
-
-    el.addEventListener('click', () => openLightbox(i));
-    el.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openLightbox(i);
-      }
-    });
-
-    masonry.appendChild(el);
-  });
-
-  // Show landscape items by default
+  // Show landscape tab by default — this builds the carousel
   switchGalleryTab('landscape');
-
-  // Build carousel
-  renderCarousel();
 }
 
 // ═══════════════════════════════════════════════════════════════
-// GALLERY CAROUSEL — infinite loop, shows 3 at once
+// TAB CAROUSEL — infinite loop, orientation-filtered
+// Shows 3 landscape slides or 3 portrait slides at once.
+// Portrait slides are narrower so we show 4 (better visual fill).
 // ═══════════════════════════════════════════════════════════════
 
-function renderCarousel() {
-  const track = document.getElementById('carousel-track');
-  const prevBtn = document.getElementById('carousel-prev');
-  const nextBtn = document.getElementById('carousel-next');
-  if (!track || !prevBtn || !nextBtn) return;
+// Module-level state so resize / cleanup can reference it
+let _tabCarousel = null;
 
-  const items = MUSEUM_DATA.gallery;
+function buildTabCarousel(items, orientation) {
+  const track   = document.getElementById('tab-track');
+  const prevBtn = document.getElementById('tab-prev');
+  const nextBtn = document.getElementById('tab-next');
+  const wrapper = document.getElementById('tab-carousel');
+  if (!track || !prevBtn || !nextBtn || !wrapper) return;
+
+  // Tear down previous instance
+  if (_tabCarousel) {
+    clearInterval(_tabCarousel.autoTimer);
+    prevBtn.onclick = null;
+    nextBtn.onclick = null;
+    wrapper.onkeydown = null;
+    wrapper.removeEventListener('touchstart', _tabCarousel.onTouchStart);
+    wrapper.removeEventListener('touchend',   _tabCarousel.onTouchEnd);
+    wrapper.removeEventListener('mouseenter', _tabCarousel.onMouseEnter);
+    wrapper.removeEventListener('mouseleave', _tabCarousel.onMouseLeave);
+    _tabCarousel = null;
+  }
+
+  // Clear slides
+  track.innerHTML = '';
+
   if (!items || items.length === 0) return;
 
-  // Clone items for seamless infinite loop (original + 2 clones on each side)
-  const allItems = [...items, ...items, ...items]; // triple: end, original, start clones
+  // For portrait we show 4 per view (narrower cards); landscape shows 3.
+  const visibleCount = orientation === 'portrait' ? 4 : 3;
+  const GAP = 16;
 
-  allItems.forEach((item, i) => {
+  // Carry the real index so lightbox opens the correct image
+  const globalItems = MUSEUM_DATA.gallery;
+
+  // Triple-clone for seamless infinite loop
+  const allItems = [...items, ...items, ...items];
+
+  allItems.forEach((item) => {
+    const realIndex = globalItems.indexOf(item);
     const slide = document.createElement('div');
-    slide.className = 'carousel-slide';
+    slide.className = `carousel-slide carousel-slide--${orientation}`;
     slide.innerHTML = `
       <img src="${item.image}"
            alt="${item.captionVi}"
@@ -344,19 +328,18 @@ function renderCarousel() {
         <span class="caption-en">${item.captionEn}</span>
       </div>
     `;
-    slide.addEventListener('click', () => openLightbox(i % items.length));
+    slide.addEventListener('click', () => openLightbox(realIndex >= 0 ? realIndex : 0));
     track.appendChild(slide);
   });
 
   const total = items.length;
-  let current = total; // start at the "original" set (index = total, after first clone)
+  let current = total; // start at the 'original' set (after the first clone)
   let isTransitioning = false;
 
   function getSlideWidth() {
     const slide = track.querySelector('.carousel-slide');
     if (!slide) return 0;
-    const gap = 16;
-    return slide.offsetWidth + gap;
+    return slide.offsetWidth + GAP;
   }
 
   function goTo(index, animated = true) {
@@ -366,59 +349,55 @@ function renderCarousel() {
     } else {
       track.style.transition = 'none';
     }
-    const slideW = getSlideWidth();
-    track.style.transform = `translateX(-${index * slideW}px)`;
+    track.style.transform = `translateX(-${index * getSlideWidth()}px)`;
     current = index;
   }
 
-  // Position initially (no animation)
   goTo(current, false);
 
-  // After transition: jump to real set if we hit the clones
   track.addEventListener('transitionend', () => {
     isTransitioning = false;
-    if (current >= total * 2) {
-      goTo(total, false);
-    } else if (current < total) {
-      goTo(total * 2 - total, false);
-    }
+    if (current >= total * 2) goTo(total, false);
+    else if (current < total) goTo(total, false);
   });
 
-  prevBtn.addEventListener('click', () => {
-    if (isTransitioning) return;
-    goTo(current - 1);
-  });
-
-  nextBtn.addEventListener('click', () => {
-    if (isTransitioning) return;
-    goTo(current + 1);
-  });
+  const onPrev = () => { if (!isTransitioning) goTo(current - 1); };
+  const onNext = () => { if (!isTransitioning) goTo(current + 1); };
+  prevBtn.onclick = onPrev;
+  nextBtn.onclick = onNext;
 
   // Keyboard
-  document.getElementById('gallery-carousel')?.addEventListener('keydown', e => {
-    if (e.key === 'ArrowLeft') prevBtn.click();
-    if (e.key === 'ArrowRight') nextBtn.click();
-  });
+  wrapper.setAttribute('tabindex', '0');
+  wrapper.onkeydown = e => {
+    if (e.key === 'ArrowLeft')  onPrev();
+    if (e.key === 'ArrowRight') onNext();
+  };
 
-  // Touch/swipe
+  // Touch / swipe
   let touchStartX = 0;
-  const carousel = document.getElementById('gallery-carousel');
-  carousel?.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-  carousel?.addEventListener('touchend', e => {
+  const onTouchStart = e => { touchStartX = e.touches[0].clientX; };
+  const onTouchEnd   = e => {
     const dx = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(dx) > 40) dx > 0 ? nextBtn.click() : prevBtn.click();
-  });
+    if (Math.abs(dx) > 40) dx > 0 ? onNext() : onPrev();
+  };
+  wrapper.addEventListener('touchstart', onTouchStart, { passive: true });
+  wrapper.addEventListener('touchend',   onTouchEnd);
 
-  // Auto-advance every 4s
-  let autoTimer = setInterval(() => nextBtn.click(), 4000);
-  carousel?.addEventListener('mouseenter', () => clearInterval(autoTimer));
-  carousel?.addEventListener('mouseleave', () => {
+  // Auto-advance every 4.5 s
+  let autoTimer = setInterval(onNext, 4500);
+  const onMouseEnter = () => clearInterval(autoTimer);
+  const onMouseLeave = () => {
     clearInterval(autoTimer);
-    autoTimer = setInterval(() => nextBtn.click(), 4000);
-  });
+    autoTimer = setInterval(onNext, 4500);
+  };
+  wrapper.addEventListener('mouseenter', onMouseEnter);
+  wrapper.addEventListener('mouseleave', onMouseLeave);
 
   // Recalculate on resize
   window.addEventListener('resize', () => goTo(current, false));
+
+  // Store state for teardown
+  _tabCarousel = { autoTimer, onTouchStart, onTouchEnd, onMouseEnter, onMouseLeave };
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -721,28 +700,27 @@ function escapeHTML(str) {
 }
 
 // ═══════════════════════════════════════════════════════════════
-// GALLERY TAB SWITCHER (Landscape / Portrait)
+// GALLERY TAB SWITCHER — rebuilds carousel with filtered items
 // ═══════════════════════════════════════════════════════════════
 
 function switchGalleryTab(mode) {
-  const masonry = document.getElementById('gallery-masonry');
   const btnLandscape = document.getElementById('tab-landscape');
-  const btnPortrait = document.getElementById('tab-portrait');
+  const btnPortrait  = document.getElementById('tab-portrait');
 
-  if (!masonry) return;
-  masonry.dataset.mode = mode;
-
+  // Update button active states
   if (mode === 'landscape') {
     btnLandscape.className = 'btn btn-primary';
-    btnPortrait.className = 'btn btn-outline';
-    masonry.querySelectorAll('.gallery-item').forEach(el => {
-      el.style.display = el.dataset.orientation === 'landscape' ? '' : 'none';
-    });
+    btnPortrait.className  = 'btn btn-outline';
   } else {
-    btnPortrait.className = 'btn btn-primary';
+    btnPortrait.className  = 'btn btn-primary';
     btnLandscape.className = 'btn btn-outline';
-    masonry.querySelectorAll('.gallery-item').forEach(el => {
-      el.style.display = el.dataset.orientation === 'portrait' ? '' : 'none';
-    });
   }
+
+  // Filter gallery items by orientation
+  const filtered = MUSEUM_DATA.gallery.filter(item =>
+    (item.orientation || 'landscape') === mode
+  );
+
+  // (Re)build the carousel with the filtered subset
+  buildTabCarousel(filtered, mode);
 }
