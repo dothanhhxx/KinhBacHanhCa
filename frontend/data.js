@@ -373,16 +373,15 @@ const MUSEUM_DATA = {
   ],
   "videos": {
     "interviews": [
-      { "id": "v1", "titleVi": "GS. Nguyễn Văn Minh", "titleEn": "Prof. Nguyen Van Minh", "role": "Nhà sử học — Historian" },
-      { "id": "v2", "titleVi": "Đại tá Trần Quốc Hùng", "titleEn": "Col. Tran Quoc Hung", "role": "Cựu chiến binh — Veteran" },
-      { "id": "v3", "titleVi": "Sinh viên Lê Thị Hoa", "titleEn": "Student Le Thi Hoa", "role": "Sinh viên — Student" },
-      { "id": "v4", "titleVi": "Nguyễn Thanh Tùng", "titleEn": "Nguyen Thanh Tung", "role": "Hướng dẫn viên — Guide" }
+      { "id": "v1", "titleVi": "Nghệ sĩ Thanh Quý", "titleEn": "Artist Thanh Quy", "role": "Phó Giám đốc Nhà hát — Vice Director", "youtubeId": "86bvnxPRbLI" },
+      { "id": "v2", "titleVi": "Biểu diễn Quan họ", "titleEn": "Quan Ho Performance", "role": "Trình diễn dân ca — Folk Performance", "youtubeId": "ZFUcKdvoiho" },
+      { "id": "v3", "titleVi": "Biểu diễn Quan họ", "titleEn": "Quan Ho Performance", "role": "Trình diễn dân ca — Folk Performance", "youtubeId": "fJmw5SNafXY" },
+      { "id": "v4", "titleVi": "Liền anh xướng câu Quan họ", "titleEn": "Lien Anh Sings Quan Ho Melodies", "role": "Trình diễn dân ca — Folk Performance", "youtubeId": "kCFXuWcz5AA" }
     ],
     "featured": {
-      "titleVi": "Hành trình qua lịch sử",
-      "titleEn": "A Journey Through History",
-      "descVi": "Phim tài liệu về hành trình dựng nước và giữ nước của dân tộc Việt Nam",
-      "descEn": "A documentary about the journey of nation-building and defense of the Vietnamese people"
+      "titleVi": "Nghệ sĩ Thu Hà",
+      "titleEn": "Artist Thu Ha",
+      "youtubeId": "JmKk3aqfGG8"
     }
   },
   "testimonials": []

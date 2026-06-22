@@ -408,6 +408,14 @@ function renderVideos() {
   const grid = document.getElementById('video-interviews');
   const { interviews, featured } = MUSEUM_DATA.videos;
 
+  // Clear existing to prevent duplicates
+  grid.innerHTML = '';
+
+  // Helper to play youtube video
+  const playYoutube = (container, youtubeId) => {
+    container.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border-radius:inherit; z-index: 10;"></iframe>`;
+  };
+
   // Interview cards (9:16)
   interviews.forEach((v, i) => {
     const card = document.createElement('div');
@@ -415,13 +423,13 @@ function renderVideos() {
     card.style.transitionDelay = `${i * 60}ms`;
     card.setAttribute('role', 'button');
     card.setAttribute('tabindex', '0');
-    card.setAttribute('aria-label', `Xem phỏng vấn ${v.titleVi}`);
+    card.setAttribute('aria-label', `Xem video ${v.titleVi}`);
 
-    const initials = v.titleVi.split(' ').map(w => w[0]).join('').slice(0, 2);
+    // Use YouTube thumbnail instead of initials
+    const thumbUrl = `https://img.youtube.com/vi/${v.youtubeId}/hqdefault.jpg`;
 
     card.innerHTML = `
-      <div class="video-card-bg">
-        <span class="initials" aria-hidden="true">${initials}</span>
+      <div class="video-card-bg" style="background: url('${thumbUrl}') center/cover no-repeat;">
       </div>
       <div class="video-card-overlay">
         <div class="video-play-btn" aria-hidden="true"></div>
@@ -432,12 +440,36 @@ function renderVideos() {
       </div>
     `;
 
+    card.addEventListener('click', () => playYoutube(card, v.youtubeId));
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        playYoutube(card, v.youtubeId);
+      }
+    });
+
     grid.appendChild(card);
   });
 
   // Featured video
   document.getElementById('featured-video-title-vi').textContent = featured.titleVi;
   document.getElementById('featured-video-title-en').textContent = featured.titleEn;
+  
+  const featuredCard = document.getElementById('featured-video-card');
+  const featuredBg = featuredCard.querySelector('.video-card-bg');
+  
+  // Update featured background with YouTube thumbnail
+  const featuredThumb = `https://img.youtube.com/vi/${featured.youtubeId}/maxresdefault.jpg`;
+  featuredBg.style.background = `url('${featuredThumb}') center/cover no-repeat`;
+  featuredBg.innerHTML = ''; // Remove initials
+
+  featuredCard.addEventListener('click', () => playYoutube(featuredCard, featured.youtubeId));
+  featuredCard.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      playYoutube(featuredCard, featured.youtubeId);
+    }
+  });
 }
 
 // ═══════════════════════════════════════════════════════════════
