@@ -379,8 +379,8 @@ const MUSEUM_DATA = {
       { "id": "v4", "titleVi": "Liền anh xướng câu Quan họ", "titleEn": "Lien Anh Sings Quan Ho Melodies", "role": "Trình diễn dân ca — Folk Performance", "youtubeId": "kCFXuWcz5AA" }
     ],
     "featured": {
-      "titleVi": "Nghệ sĩ Thu Hà",
-      "titleEn": "Artist Thu Ha",
+      "titleVi": "Nghệ sĩ Thu Ngà",
+      "titleEn": "Artist Thu Nga",
       "youtubeId": "JmKk3aqfGG8"
     }
   },
