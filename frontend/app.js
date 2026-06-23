@@ -406,68 +406,66 @@ function buildTabCarousel(items, orientation) {
 // ═══════════════════════════════════════════════════════════════
 
 function renderVideos() {
-  const grid = document.getElementById('video-interviews');
+  const container = document.getElementById('video-interviews');
   const { interviews, featured } = MUSEUM_DATA.videos;
 
   // Clear existing to prevent duplicates
-  grid.innerHTML = '';
+  container.innerHTML = '';
 
-  // Helper to play youtube video
-  const playYoutube = (container, youtubeId) => {
-    container.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border-radius:inherit; z-index: 10;"></iframe>`;
-  };
+  // Build wrapper
+  const wrapper = document.createElement('div');
+  wrapper.className = 'video-interviews-wrapper';
 
-  // Interview cards (16:9)
-  interviews.forEach((v, i) => {
-    const card = document.createElement('div');
-    card.className = 'video-card video-card-landscape stagger-item';
-    card.style.transitionDelay = `${i * 60}ms`;
-    card.setAttribute('role', 'button');
-    card.setAttribute('tabindex', '0');
-    card.setAttribute('aria-label', `Xem video ${v.titleVi}`);
+  // ── Row 1: first 4 videos in fixed grid ──────────────────────
+  const row1 = document.createElement('div');
+  row1.className = 'video-row-fixed';
 
-    // Use YouTube thumbnail instead of initials
-    const thumbUrl = `https://img.youtube.com/vi/${v.youtubeId}/maxresdefault.jpg`;
+  const firstBatch  = interviews.slice(0, 4);
+  const secondBatch = interviews.slice(4);
 
-    card.innerHTML = `
-      <div class="video-card-bg" style="background: url('${thumbUrl}') center/cover no-repeat;">
-      </div>
-      <div class="video-card-overlay">
-        <div class="video-play-btn" aria-hidden="true"></div>
-        <div class="video-card-info">
-          <div class="title-vi">${v.titleVi}</div>
-          <div class="role">${v.role}</div>
-        </div>
-      </div>
+  firstBatch.forEach((v, i) => buildVideoCard(v, i, row1));
+  wrapper.appendChild(row1);
+
+  // ── Row 2: remaining videos in horizontal scroll ─────────────
+  if (secondBatch.length > 0) {
+    // Label
+    const label = document.createElement('div');
+    label.className = 'video-row-scroll-label';
+    label.innerHTML = `
+      <span>Xem thêm · More Videos</span>
+      <span class="scroll-hint">
+        Vuốt để xem thêm
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m9 18 6-6-6-6"/>
+        </svg>
+      </span>
     `;
+    wrapper.appendChild(label);
 
-    // Open video lightbox instead of replacing card with iframe
-    const openVL = () => openVideoLightbox({
-      youtubeId: v.youtubeId,
-      titleVi:   v.titleVi,
-      titleEn:   v.titleEn || '',
-      role:      v.role,
-      aspect:    'landscape'
-    });
-    card.addEventListener('click', openVL);
-    card.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openVL(); }
-    });
+    // Scroll outer (for mask-image fade)
+    const scrollOuter = document.createElement('div');
+    scrollOuter.className = 'video-row-scroll-outer';
 
-    grid.appendChild(card);
-  });
+    const scrollRow = document.createElement('div');
+    scrollRow.className = 'video-row-scroll';
 
-  // Featured video
+    secondBatch.forEach((v, i) => buildVideoCard(v, i, scrollRow));
+    scrollOuter.appendChild(scrollRow);
+    wrapper.appendChild(scrollOuter);
+  }
+
+  container.appendChild(wrapper);
+
+  // ── Featured video ────────────────────────────────────────────
   document.getElementById('featured-video-title-vi').textContent = featured.titleVi;
   document.getElementById('featured-video-title-en').textContent = featured.titleEn;
-  
+
   const featuredCard = document.getElementById('featured-video-card');
-  const featuredBg = featuredCard.querySelector('.video-card-bg');
-  
-  // Update featured background with YouTube thumbnail
+  const featuredBg   = featuredCard.querySelector('.video-card-bg');
+
   const featuredThumb = `https://img.youtube.com/vi/${featured.youtubeId}/maxresdefault.jpg`;
   featuredBg.style.background = `url('${featuredThumb}') center/cover no-repeat`;
-  featuredBg.innerHTML = ''; // Remove initials
+  featuredBg.innerHTML = '';
 
   const openFeaturedVL = () => openVideoLightbox({
     youtubeId: featured.youtubeId,
@@ -480,6 +478,43 @@ function renderVideos() {
   featuredCard.addEventListener('keydown', e => {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openFeaturedVL(); }
   });
+}
+
+/** Helper: build a single video card and append it to a container */
+function buildVideoCard(v, i, container) {
+  const card = document.createElement('div');
+  card.className = 'video-card video-card-landscape stagger-item';
+  card.style.transitionDelay = `${i * 60}ms`;
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-label', `Xem video ${v.titleVi}`);
+
+  const thumbUrl = `https://img.youtube.com/vi/${v.youtubeId}/maxresdefault.jpg`;
+
+  card.innerHTML = `
+    <div class="video-card-bg" style="background: url('${thumbUrl}') center/cover no-repeat;"></div>
+    <div class="video-card-overlay">
+      <div class="video-play-btn" aria-hidden="true"></div>
+      <div class="video-card-info">
+        <div class="title-vi">${v.titleVi}</div>
+        <div class="role">${v.role}</div>
+      </div>
+    </div>
+  `;
+
+  const openVL = () => openVideoLightbox({
+    youtubeId: v.youtubeId,
+    titleVi:   v.titleVi,
+    titleEn:   v.titleEn || '',
+    role:      v.role,
+    aspect:    'landscape'
+  });
+  card.addEventListener('click', openVL);
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openVL(); }
+  });
+
+  container.appendChild(card);
 }
 
 // ═══════════════════════════════════════════════════════════════

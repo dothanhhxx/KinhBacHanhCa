@@ -26,8 +26,8 @@
   --color-overlay:     rgba(13, 13, 13, 0.65);
 
   /* Typography */
-  --font-display:  'Cormorant Garamond', 'Times New Roman', serif;
-  --font-body:     'Manrope', 'Segoe UI', sans-serif;
+  --font-display:  'SVN-Avo', 'Cormorant Garamond', 'Times New Roman', serif;
+  --font-body:     'SVN-Avo', 'Manrope', 'Segoe UI', sans-serif;
   --font-mono:     'Space Mono', 'Courier New', monospace;
 
   /* Type Scale */
@@ -164,9 +164,9 @@ ul, ol {
 .font-mono    { font-family: 'SVN-Avo Regular', 'SVN-Avo', sans-serif !important; }
 
 .title-vi {
-  font-family: var(--font-display);
+  font-family: 'SVN-Avo', 'Manrope', sans-serif;
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.25;
   letter-spacing: -0.01em;
   color: var(--color-text);
 }
@@ -1275,10 +1275,92 @@ ul, ol {
 }
 
 /* ── VIDEO SECTION ─────────────────────────────────────────── */
-.video-interviews-grid {
+.video-interviews-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* Hàng 1: 4 video cố định, grid */
+.video-row-fixed {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-6);
+  gap: var(--space-4);
+}
+
+/* Hàng 2: label + scroll ngang */
+.video-row-scroll-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-2);
+}
+
+.video-row-scroll-label span {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.video-row-scroll-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.video-row-scroll-label .scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-light);
+  white-space: nowrap;
+}
+
+.video-row-scroll-label .scroll-hint svg {
+  animation: nudge-x 2s ease-in-out infinite;
+}
+
+@keyframes nudge-x {
+  0%, 100% { transform: translateX(0); }
+  50%       { transform: translateX(5px); }
+}
+
+/* Scroll container cho hàng 2 */
+.video-row-scroll-outer {
+  position: relative;
+  /* Fade edges */
+  mask-image: linear-gradient(to right, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
+}
+
+.video-row-scroll {
+  display: flex;
+  gap: var(--space-4);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: var(--space-2) var(--space-6) var(--space-4);
+  scrollbar-width: none;  /* Firefox */
+}
+
+.video-row-scroll::-webkit-scrollbar {
+  display: none;  /* Chrome/Safari */
+}
+
+.video-row-scroll .video-card {
+  flex: 0 0 calc(25% - var(--space-4) * 3 / 4);
+  scroll-snap-align: start;
+}
+
+/* video-interviews-grid = container div in HTML (id="video-interviews") */
+.video-interviews-grid {
+  display: block;
 }
 
 .video-card {
@@ -1907,8 +1989,14 @@ ul, ol {
     grid-column: 1 / -1;
   }
 
-  .video-interviews-grid {
+  /* Video row fixed: 2 cột trên tablet */
+  .video-row-fixed {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Scroll row: card chiếm 50% rộng */
+  .video-row-scroll .video-card {
+    flex: 0 0 calc(50% - var(--space-4) / 2);
   }
 }
 
@@ -1973,8 +2061,14 @@ ul, ol {
     bottom: calc(var(--space-6) + 70px);
   }
 
-  .video-interviews-grid {
+  /* Video row fixed: 2 cột trên mobile */
+  .video-row-fixed {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Scroll row: card chiếm ~80vw trên mobile */
+  .video-row-scroll .video-card {
+    flex: 0 0 min(80vw, 280px);
   }
 
   .timeline-item {

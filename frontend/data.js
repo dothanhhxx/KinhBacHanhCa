@@ -376,7 +376,11 @@ const MUSEUM_DATA = {
       { "id": "v1", "titleVi": "Nghệ sĩ Thanh Quý", "titleEn": "Artist Thanh Quy", "role": "Phó Giám đốc Nhà hát — Vice Director", "youtubeId": "86bvnxPRbLI" },
       { "id": "v2", "titleVi": "Biểu diễn Quan họ", "titleEn": "Quan Ho Performance", "role": "Trình diễn dân ca — Folk Performance", "youtubeId": "ZFUcKdvoiho" },
       { "id": "v3", "titleVi": "Biểu diễn Quan họ", "titleEn": "Quan Ho Performance", "role": "Trình diễn dân ca — Folk Performance", "youtubeId": "fJmw5SNafXY" },
-      { "id": "v4", "titleVi": "Liền anh xướng câu Quan họ", "titleEn": "Lien Anh Sings Quan Ho Melodies", "role": "Trình diễn dân ca — Folk Performance", "youtubeId": "kCFXuWcz5AA" }
+      { "id": "v4", "titleVi": "Liền anh xướng câu Quan họ", "titleEn": "Lien Anh Sings Quan Ho Melodies", "role": "Trình diễn dân ca — Folk Performance", "youtubeId": "kCFXuWcz5AA" },
+      { "id": "v5", "titleVi": "Nghệ sĩ Thu Ngà", "titleEn": "Artist Thu Nga", "role": "Nghệ sĩ Nhà hát — Theatre Artist", "youtubeId": "JmKk3aqfGG8" },
+      { "id": "v6", "titleVi": "Phỏng vấn Việt kiều", "titleEn": "Interview with Overseas Vietnamese", "role": "Kiều bào — Overseas Vietnamese", "youtubeId": "x6i1AgJMX1s" },
+      { "id": "v7", "titleVi": "Guillaume Le Guidec", "titleEn": "Guillaume Le Guidec — Plouhinec, France", "role": "Plouhinec, Pháp — Plouhinec, France", "youtubeId": "AoCf4NMUs9o" },
+      { "id": "v8", "titleVi": "Phỏng vấn du học sinh", "titleEn": "Interview with International Students", "role": "Du học sinh — International Students", "youtubeId": "aUAtt8CN_hY" }
     ],
     "featured": {
       "titleVi": "Nghệ sĩ Thu Ngà",
