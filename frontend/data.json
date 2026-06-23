@@ -14,7 +14,7 @@
   },
   "nav": [
     { "id": "about", "labelVi": "Giới thiệu", "labelEn": "About" },
-    { "id": "periods", "labelVi": "Lịch sử", "labelEn": "History" },
+    { "id": "periods", "labelVi": "Lãnh đạo", "labelEn": "Lãnh đạo" },
     { "id": "timeline", "labelVi": "Niên biểu", "labelEn": "Timeline" },
     { "id": "gallery", "labelVi": "Hiện vật", "labelEn": "Artifacts" },
     { "id": "videos", "labelVi": "Video", "labelEn": "Videos" },
