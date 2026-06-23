@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // renderTestimonials(); // Section removed
     initScrollAnimations();
     initLightbox();
+    initVideoLightbox();
     initAIChat();
     initSmoothScroll();
 
@@ -416,17 +417,17 @@ function renderVideos() {
     container.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border-radius:inherit; z-index: 10;"></iframe>`;
   };
 
-  // Interview cards (9:16)
+  // Interview cards (16:9)
   interviews.forEach((v, i) => {
     const card = document.createElement('div');
-    card.className = 'video-card video-card-portrait stagger-item';
+    card.className = 'video-card video-card-landscape stagger-item';
     card.style.transitionDelay = `${i * 60}ms`;
     card.setAttribute('role', 'button');
     card.setAttribute('tabindex', '0');
     card.setAttribute('aria-label', `Xem video ${v.titleVi}`);
 
     // Use YouTube thumbnail instead of initials
-    const thumbUrl = `https://img.youtube.com/vi/${v.youtubeId}/hqdefault.jpg`;
+    const thumbUrl = `https://img.youtube.com/vi/${v.youtubeId}/maxresdefault.jpg`;
 
     card.innerHTML = `
       <div class="video-card-bg" style="background: url('${thumbUrl}') center/cover no-repeat;">
@@ -440,12 +441,17 @@ function renderVideos() {
       </div>
     `;
 
-    card.addEventListener('click', () => playYoutube(card, v.youtubeId));
+    // Open video lightbox instead of replacing card with iframe
+    const openVL = () => openVideoLightbox({
+      youtubeId: v.youtubeId,
+      titleVi:   v.titleVi,
+      titleEn:   v.titleEn || '',
+      role:      v.role,
+      aspect:    'landscape'
+    });
+    card.addEventListener('click', openVL);
     card.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        playYoutube(card, v.youtubeId);
-      }
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openVL(); }
     });
 
     grid.appendChild(card);
@@ -463,12 +469,16 @@ function renderVideos() {
   featuredBg.style.background = `url('${featuredThumb}') center/cover no-repeat`;
   featuredBg.innerHTML = ''; // Remove initials
 
-  featuredCard.addEventListener('click', () => playYoutube(featuredCard, featured.youtubeId));
+  const openFeaturedVL = () => openVideoLightbox({
+    youtubeId: featured.youtubeId,
+    titleVi:   featured.titleVi,
+    titleEn:   featured.titleEn || '',
+    role:      '',
+    aspect:    'landscape'
+  });
+  featuredCard.addEventListener('click', openFeaturedVL);
   featuredCard.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      playYoutube(featuredCard, featured.youtubeId);
-    }
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openFeaturedVL(); }
   });
 }
 
@@ -647,6 +657,122 @@ function updateLightboxContent() {
 }
 
 // ═══════════════════════════════════════════════════════════════
+// VIDEO LIGHTBOX
+// ═══════════════════════════════════════════════════════════════
+
+let _vlCurrent = null; // current video data
+
+function initVideoLightbox() {
+  const modal     = document.getElementById('video-lightbox');
+  const closeBtn  = document.getElementById('vl-close');
+  const fsBtn     = document.getElementById('vl-fullscreen');
+  const infoBtn   = document.getElementById('vl-info-btn');
+  const infoPanel = document.getElementById('vl-info-panel');
+
+  if (!modal) return;
+
+  // Close
+  closeBtn.addEventListener('click', closeVideoLightbox);
+  modal.addEventListener('click', e => { if (e.target === modal) closeVideoLightbox(); });
+
+  // Fullscreen — requests native fullscreen on the iframe container
+  fsBtn.addEventListener('click', () => {
+    const container = document.getElementById('vl-iframe-container');
+    if (!container) return;
+    const iframe = container.querySelector('iframe');
+    const el = iframe || container;
+    if (el.requestFullscreen) el.requestFullscreen();
+    else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+    else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
+  });
+
+  // Info panel toggle
+  infoBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    infoPanel.classList.toggle('active');
+  });
+
+  // Keyboard
+  document.addEventListener('keydown', e => {
+    if (!modal.classList.contains('active')) return;
+    if (e.key === 'Escape') closeVideoLightbox();
+  });
+}
+
+function openVideoLightbox({ youtubeId, titleVi, titleEn, role, aspect }) {
+  _vlCurrent = { youtubeId, titleVi, titleEn, role, aspect };
+
+  const modal      = document.getElementById('video-lightbox');
+  const wrap       = document.getElementById('vl-player-wrap');
+  const container  = document.getElementById('vl-iframe-container');
+  const captionVi  = document.getElementById('vl-caption-vi');
+  const captionEn  = document.getElementById('vl-caption-en');
+  const metaEl     = document.getElementById('vl-metadata');
+  const infoPanel  = document.getElementById('vl-info-panel');
+
+  // Set aspect class
+  wrap.classList.toggle('portrait', aspect === 'portrait');
+
+  // Inject iframe (autoplay)
+  container.innerHTML = `<iframe
+    src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+    allowfullscreen
+    title="${escapeHTML(titleVi)}"
+  ></iframe>`;
+
+  // Captions
+  captionVi.textContent = titleVi;
+  captionEn.textContent = role ? `${titleEn ? titleEn + ' — ' : ''}${role}` : titleEn;
+
+  // Info panel metadata
+  infoPanel.classList.remove('active');
+  metaEl.innerHTML = `
+    <div class="metadata-row">
+      <span class="metadata-label">Tiêu đề</span>
+      <span class="metadata-value">${escapeHTML(titleVi)}</span>
+    </div>
+    ${titleEn ? `<div class="metadata-row"><span class="metadata-label">Title (EN)</span><span class="metadata-value">${escapeHTML(titleEn)}</span></div>` : ''}
+    ${role ? `<div class="metadata-row"><span class="metadata-label">Vai trò</span><span class="metadata-value">${escapeHTML(role)}</span></div>` : ''}
+    <div class="metadata-row">
+      <span class="metadata-label">Nền tảng</span>
+      <span class="metadata-value">YouTube</span>
+    </div>
+    <div class="metadata-row">
+      <span class="metadata-label">Video ID</span>
+      <span class="metadata-value">${youtubeId}</span>
+    </div>
+    <div class="metadata-row">
+      <span class="metadata-label">Định dạng</span>
+      <span class="metadata-value">${aspect === 'portrait' ? 'Dọc 9:16' : 'Ngang 16:9'}</span>
+    </div>
+    <div class="metadata-row">
+      <span class="metadata-label">Xem trực tiếp</span>
+      <span class="metadata-value"><a href="https://youtu.be/${youtubeId}" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline;">youtu.be/${youtubeId}</a></span>
+    </div>
+  `;
+
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('vl-close').focus();
+}
+
+function closeVideoLightbox() {
+  const modal     = document.getElementById('video-lightbox');
+  const container = document.getElementById('vl-iframe-container');
+  const infoPanel = document.getElementById('vl-info-panel');
+
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+  infoPanel.classList.remove('active');
+
+  // Stop video by clearing iframe
+  setTimeout(() => { container.innerHTML = ''; }, 300);
+  _vlCurrent = null;
+}
+
+// ═══════════════════════════════════════════════════════════════
 // AI CHAT WIDGET
 // ═══════════════════════════════════════════════════════════════
 
@@ -794,3 +920,58 @@ function switchGalleryTab(mode) {
   // (Re)build the carousel with the filtered subset
   buildTabCarousel(filtered, mode);
 }
+
+// ═══════════════════════════════════════════════════════════════
+// DOCUMENT LIGHTBOX (PRESS KIT)
+// ═══════════════════════════════════════════════════════════════
+
+function openDocLightbox() {
+  const lightbox = document.getElementById('doc-lightbox');
+  if (lightbox) {
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeDocLightbox() {
+  const lightbox = document.getElementById('doc-lightbox');
+  if (lightbox) {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+function switchDocTab(tabId, btnElement) {
+  // Update buttons
+  const buttons = document.querySelectorAll('.doc-tab-btn');
+  buttons.forEach(btn => btn.classList.remove('active'));
+  btnElement.classList.add('active');
+
+  // Update panes
+  const panes = document.querySelectorAll('.doc-pane');
+  panes.forEach(pane => pane.classList.remove('active'));
+  
+  const targetPane = document.getElementById(`doc-${tabId}`);
+  if (targetPane) {
+    targetPane.classList.add('active');
+  }
+}
+
+// Add event listener to close when clicking outside container or pressing Escape
+document.addEventListener('DOMContentLoaded', () => {
+  const docLightbox = document.getElementById('doc-lightbox');
+  if(docLightbox) {
+    docLightbox.addEventListener('click', (e) => {
+      if(e.target === docLightbox) {
+        closeDocLightbox();
+      }
+    });
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && docLightbox && docLightbox.classList.contains('active')) {
+      closeDocLightbox();
+    }
+  });
+});
+

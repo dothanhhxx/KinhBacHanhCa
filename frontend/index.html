@@ -187,17 +187,27 @@
           <h2 class="title-vi" id="gallery-title">Dữ Liệu Dành Cho Báo Chí</h2>
           <p class="title-en">Press Media Library</p>
           <div class="section-divider"></div>
+          <button class="btn btn-primary" onclick="openDocLightbox()" style="margin-top: var(--space-4);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            Tài liệu Họp báo & Kịch bản
+          </button>
         </div>
         <!-- Tabbed Carousel Header -->
         <div class="tab-carousel-header fade-in-up">
           <div class="gallery-tabs" id="gallery-tabs" style="margin-bottom: 0;">
-            <button class="btn btn-primary" id="tab-landscape" onclick="switchGalleryTab('landscape')">
+            <button class="btn btn-primary tab-btn" id="tab-landscape" onclick="switchGalleryTab('landscape')">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><rect x="3" y="5" width="18" height="14" rx="2" ry="2"/><line x1="3" y1="12" x2="21" y2="12"/></svg>
-              Ảnh ngang — Landscape
+              <div class="tab-text">
+                <span class="caption-vi">Ảnh ngang</span>
+                <span class="caption-en">Landscape</span>
+              </div>
             </button>
-            <button class="btn btn-outline" id="tab-portrait" onclick="switchGalleryTab('portrait')">
+            <button class="btn btn-outline tab-btn" id="tab-portrait" onclick="switchGalleryTab('portrait')">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><rect x="5" y="3" width="14" height="18" rx="2" ry="2"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
-              Ảnh dọc — Portrait
+              <div class="tab-text">
+                <span class="caption-vi">Ảnh dọc</span>
+                <span class="caption-en">Portrait</span>
+              </div>
             </button>
           </div>
           <div class="carousel-controls" id="tab-carousel-controls">
@@ -366,6 +376,52 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════
+       VIDEO LIGHTBOX MODAL
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="video-lightbox" id="video-lightbox" role="dialog" aria-modal="true" aria-label="Video player">
+    <!-- Close -->
+    <button class="vl-btn vl-close" id="vl-close" aria-label="Đóng">✕</button>
+
+    <!-- Fullscreen -->
+    <button class="vl-btn vl-fullscreen" id="vl-fullscreen" aria-label="Phóng to màn hình" title="Phóng to — Fullscreen">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/>
+        <line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/>
+      </svg>
+    </button>
+
+    <!-- Info -->
+    <button class="vl-btn vl-info-btn" id="vl-info-btn" aria-label="Thông tin video" title="Thông tin — Info">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="16" x2="12" y2="12"></line>
+        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+      </svg>
+    </button>
+
+    <!-- Player -->
+    <div class="vl-player-wrap" id="vl-player-wrap">
+      <div class="vl-iframe-container" id="vl-iframe-container">
+        <!-- iframe injected by JS -->
+      </div>
+    </div>
+
+    <!-- Caption -->
+    <div class="vl-caption">
+      <div class="vl-caption-vi" id="vl-caption-vi"></div>
+      <div class="vl-caption-en" id="vl-caption-en"></div>
+    </div>
+
+    <!-- Info Panel -->
+    <div class="vl-info-panel" id="vl-info-panel">
+      <h4>Thông tin Video</h4>
+      <div class="lightbox-metadata" id="vl-metadata">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
        AI CHAT WIDGET
        ═══════════════════════════════════════════════════════════ -->
   <button class="ai-chat-toggle" id="ai-chat-toggle" aria-label="Mở trợ lý AI lịch sử" aria-expanded="false">
@@ -411,6 +467,204 @@
 
   <!-- Scripts -->
   <script src="data.js"></script>
+  <!-- ── DOCUMENT LIGHTBOX (Press Kit) ─────────────────────── -->
+  <div class="doc-lightbox" id="doc-lightbox" role="dialog" aria-modal="true" aria-labelledby="doc-modal-title">
+    <button class="doc-close" id="doc-close" aria-label="Đóng tài liệu" onclick="closeDocLightbox()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="doc-container">
+      <div class="doc-sidebar">
+        <h3 id="doc-modal-title" style="display:none;">Tài Liệu Báo Chí</h3>
+        <button class="doc-tab-btn active" onclick="switchDocTab('so-vhttdl', this)">Sở VHTTDL</button>
+        <button class="doc-tab-btn" onclick="switchDocTab('nha-hat', this)">Đại diện nhà hát</button>
+        <button class="doc-tab-btn" onclick="switchDocTab('mc', this)">Kịch bản MC</button>
+        
+        <a href="#" class="btn btn-primary doc-download-btn" onclick="alert('Tính năng tải xuống sẽ được cập nhật link sau!'); return false;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Tải PDF
+        </a>
+      </div>
+      <div class="doc-content-area">
+        
+        <!-- NỘI DUNG SỞ VHTTDL -->
+        <div class="doc-pane active" id="doc-so-vhttdl">
+          <h2 class="doc-title">Phát biểu của Lãnh đạo Sở VHTTDL tỉnh Bắc Ninh</h2>
+          <p>Kính thưa các đồng chí đại diện các ban, ngành, cơ quan thông tấn, báo chí,<br>
+          Kính thưa toàn thể quý vị đại biểu, quý vị khách quý,</p>
+          <p>Lời đầu tiên, thay mặt lãnh đạo Sở Văn hóa, Thể thao và Du lịch tỉnh Bắc Ninh, tôi xin gửi tới toàn thể quý vị đại biểu và các anh chị phóng viên lời chúc sức khỏe và hạnh phúc. Chào mừng quý vị đã đến tham dự buổi họp báo công bố Tour lưu diễn quốc tế “Kinh Bắc Ca Hành” ngày hôm nay.</p>
+          <p>Kính thưa quý vị,<br>
+          Bắc Ninh Kinh Bắc tự hào là vùng đất di sản, nơi gìn giữ những giá trị văn hóa truyền thống vô giá của dân tộc. Trong bối cảnh hội nhập quốc tế ngày càng sâu rộng, việc bảo tồn và chủ động quảng bá di sản ra thế giới là một trong những nhiệm vụ trọng tâm của ngành văn hóa tỉnh nhà.</p>
+          <p>Tour lưu diễn quốc tế “Kinh Bắc Ca Hành” là một dự án văn hóa trọng điểm, mang ý nghĩa chiến lược sâu sắc trên ba phương diện:</p>
+          <ul>
+            <li><strong>Về văn hóa:</strong> Chương trình mang sứ mệnh quảng bá rộng rãi giá trị của Dân ca Quan họ Bắc Ninh - Di sản văn hóa phi vật thể đại diện của nhân loại đã được UNESCO ghi danh - đến với bạn bè quốc tế.</li>
+            <li><strong>Về ngoại giao và du lịch:</strong> Đây là nhịp cầu tăng cường giao lưu văn hóa giữa Việt Nam và các quốc gia châu Âu, mở ra cơ hội quảng bá, thu hút du lịch và kết nối cộng đồng kiều bào hướng về cội nguồn quê hương.</li>
+            <li><strong>Về công nghiệp văn hóa:</strong> Dự án khẳng định bước đi chủ động của Bắc Ninh trong việc phát huy giá trị di sản, biến các giá trị văn hóa truyền thống thành nguồn lực phát triển bền vững.</li>
+          </ul>
+          <p>Để chuẩn bị cho một hành trình xuyên quốc gia dài ngày với quy mô lớn như thế này, tập thể cán bộ, nghệ sĩ của Nhà hát đã phải nỗ lực chuẩn bị rất công phu, tâm huyết và vượt qua không ít thử thách.</p>
+          <p>Đứng trước chuyến đi ý nghĩa này, thay mặt lãnh đạo Sở VHTTDL, tôi gửi gắm trọn vẹn niềm tin và sự kỳ vọng vào các nghệ sĩ - những người chiến sĩ trên mặt trận văn hóa. Chúng tôi mong rằng, mỗi thành viên trong đoàn lưu diễn sẽ mang theo toàn bộ niềm tự hào và tình yêu quê hương lên sân khấu quốc tế. Hãy để mỗi câu ca, mỗi cử chỉ giao tiếp mang đậm cốt cách ứng xử tinh tế, hiếu khách của người Kinh Bắc, chạm đến trái tim của bạn bè năm châu và sưởi ấm lòng những người con xa xứ.</p>
+          <p>Chúng tôi sẽ luôn dõi theo, đồng hành và tạo mọi điều kiện tốt nhất để các nghệ sĩ yên tâm cống hiến, hoàn thành thật trọn vẹn chuyến “ca hành” đầy tự hào này.</p>
+          <p>Thay mặt Sở VHTTDL tỉnh Bắc Ninh, tôi xin chân thành cảm ơn sự quan tâm, đồng hành của các cơ quan thông tấn báo chí. Chúc Tour lưu diễn quốc tế “Kinh Bắc Ca Hành” thành công rực rỡ!</p>
+          <p>Xin trân trọng cảm ơn!</p>
+        </div>
+
+        <!-- NỘI DUNG ĐẠI DIỆN NHÀ HÁT -->
+        <div class="doc-pane" id="doc-nha-hat">
+          <h2 class="doc-title">Phát biểu của Đại diện Nhà hát Dân ca Quan họ</h2>
+          <p>Kính thưa bà Nguyễn Thị Mỹ Hạnh - Giám đốc Sở VHTTDL tỉnh Bắc Ninh,<br>
+          Kính thưa các quý vị đại biểu, các anh chị phóng viên, biên tập viên,</p>
+          <p>Lời đầu tiên, thay mặt Ban Giám đốc và toàn thể nghệ sĩ của Nhà hát, tôi xin gửi lời cảm ơn sâu sắc đến sự quan tâm, chỉ đạo và những lời gửi gắm đầy tâm huyết của đồng chí Giám đốc Sở. Đó là nguồn động viên và là kim chỉ nam để tập thể Nhà hát quyết tâm hoàn thành xuất sắc chuyến lưu diễn này.</p>
+          <p>Sau đây tôi xin tóm tắt những thông tin cốt lõi về lộ trình và nội dung của Tour lưu diễn quốc tế “Kinh Bắc Ca Hành”.</p>
+          <p>“Kinh Bắc ca hành” là chuỗi sự kiện giao lưu văn hóa xuyên châu Âu, kéo dài từ ngày 26/1/2029 đến ngày 11/2/2029. Chúng tôi không chỉ biểu diễn nghệ thuật thuần túy, mà mang đến một hệ sinh thái văn hóa gồm: Trình diễn âm nhạc (80-90 phút), Triển lãm ảnh di sản và Không gian trải nghiệm tương tác.</p>
+          <p>Hành trình được chia làm 3 chặng dừng chân tại Pháp, Đức và Cộng hòa Séc. Đặc biệt, toàn bộ các buổi biểu diễn và không gian trải nghiệm trong tour lưu diễn này hoàn toàn không thu phí vào cửa đối với cả công chúng quốc tế lẫn bà con kiều bào. Đây là nỗ lực rất lớn của tỉnh nhà và các đơn vị đồng hành nhằm phục vụ cộng đồng và lan tỏa giá trị di sản một cách rộng rãi, không vì mục đích thương mại.</p>
+          
+          <div class="doc-stage">
+            <h4>Chặng 1: KHỞI ÂM tại Paris, Pháp (Từ 26/1 - 28/1/2029):</h4>
+            <ul>
+              <li><strong>Chủ đề:</strong> <em>Mời nước mời trầu</em> – là lời chào hiếu khách từ dòng sông Cầu đến bạn bè quốc tế.</li>
+              <li><strong>Địa điểm:</strong> Trụ sở UNESCO tại Paris và Nhà hát Claude Lévi-Strauss.</li>
+              <li><strong>Hoạt động:</strong> Triển lãm ảnh “60 năm hành trình Nhà hát”, không gian mặc thử áo tứ thân, nón quai thao và đêm nhạc Quan họ giao duyên.</li>
+            </ul>
+          </div>
+          
+          <div class="doc-stage">
+            <h4>Chặng 2: GIAO HÒA tại Berlin, Đức (Từ 2/2 – 4/2/2029):</h4>
+            <ul>
+              <li><strong>Chủ đề:</strong> <em>Kết chạ giao duyên</em> - biểu trưng cho sự đối thoại văn hóa toàn cầu.</li>
+              <li><strong>Địa điểm:</strong> Nhà Văn hóa Thế giới (Haus der Kulturen der Welt) và Không gian Humboldt Forum.</li>
+              <li><strong>Hoạt động:</strong> Triển lãm “Di sản sống”, Góc trải nghiệm âm thanh tương tác qua mã QR (hỗ trợ đa ngôn ngữ), và tiết mục biểu diễn kết hợp đặc biệt với một đơn vị nghệ thuật bản địa của Đức.</li>
+            </ul>
+          </div>
+
+          <div class="doc-stage">
+            <h4>Chặng 3: ĐỒNG VỌNG tại Praha, Cộng hòa Séc (Từ 9/2 – 11/2/2029):</h4>
+            <ul>
+              <li><strong>Chủ đề:</strong> <em>Người ơi người ở đừng về</em> – lời kết lưu luyến hướng sâu sắc đến cộng đồng kiều bào.</li>
+              <li><strong>Địa điểm:</strong> Nhà hát Hybernia Theatre và Nhà hát La Fabrika.</li>
+              <li><strong>Hoạt động:</strong> Không gian ký ức “Mang quê hương theo mình”, mô hình “Bản đồ Đồng vọng” lưu lại lời chúc của khán giả. Đêm nhạc tại đây sẽ có các tiết mục hòa giọng chung của các câu lạc bộ văn nghệ kiều bào tại Séc.</li>
+            </ul>
+          </div>
+
+          <p>Kính thưa quý vị,<br>
+          Đoàn lưu diễn với các nghệ sĩ ưu tú của Nhà hát đã hoàn tất công tác tập luyện, sẵn sàng mang trọn vẹn tinh hoa Quan họ nguyên bản lên các sân khấu quốc tế tầm cỡ. Chúng tôi tin rằng “Kinh Bắc Ca Hành” sẽ để lại ấn tượng sâu đậm trong lòng công chúng châu Âu.</p>
+          <p>Sau đây, tôi xin phép được lắng nghe và giải đáp mọi câu hỏi từ các anh chị phóng viên về dự án này.</p>
+          <p>Xin trân trọng cảm ơn quý vị!</p>
+        </div>
+
+        <!-- NỘI DUNG MC -->
+        <div class="doc-pane" id="doc-mc">
+          <h2 class="doc-title">Kịch bản MC - Họp báo công bố Tour lưu diễn</h2>
+          <div class="table-responsive">
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th width="20%">Nội dung chính</th>
+                  <th width="70%">Lời dẫn</th>
+                  <th width="10%">Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Khai mạc</strong></td>
+                  <td>
+                    <p>Kính thưa quý vị đại biểu,<br>Kính thưa quý vị khách quý,<br>Quý cơ quan thông tấn báo chí cùng toàn thể quý vị có mặt trong buổi họp báo hôm nay!</p>
+                    <p>Lời đầu tiên, cho phép Huyền Vy thay mặt Ban Tổ chức gửi tới quý vị lời chào trân trọng, lời cảm ơn chân thành vì đã dành thời gian tham dự Họp báo Công bố Tour lưu diễn quốc tế "Kinh Bắc Ca Hành".</p>
+                    <p>Chương trình do Sở Văn hóa, Thể thao và Du lịch Bắc Ninh chỉ đạo, Nhà hát Dân ca Quan họ Bắc Ninh tổ chức thực hiện, với mong muốn đưa những làn điệu Quan họ - Di sản văn hóa phi vật thể đại diện của nhân loại - đến gần hơn với cộng đồng quốc tế, góp phần lan tỏa giá trị văn hóa Việt Nam ra thế giới.</p>
+                    <p>Và ngay sau đây, BTC xin phép được bắt đầu chương trình họp báo.</p>
+                  </td>
+                  <td class="text-center">1p</td>
+                </tr>
+                <tr>
+                  <td><strong>Văn nghệ mở màn</strong></td>
+                  <td>
+                    <p>Kính thưa quý vị,</p>
+                    <p>Nhắc đến Bắc Ninh là nhắc đến miền quê của những câu hát giao duyên đằm thắm, nơi dân ca Quan họ đã trở thành niềm tự hào của văn hóa Việt Nam và được UNESCO ghi danh là Di sản văn hóa phi vật thể đại diện của nhân loại.</p>
+                    <p>Để mở đầu chương trình hôm nay, xin kính mời quý vị cùng thưởng thức một tiết mục dân ca Quan họ đặc sắc do nghệ sĩ Thảo Lan của Nhà hát Dân ca Quan họ Bắc Ninh trình bày.</p>
+                    <p>Xin trân trọng kính mời!</p>
+                    <p><em>(Trình diễn tiết mục Quan họ: ví dụ “Người ơi người ở đừng về” hoặc một trích đoạn Quan họ tiêu biểu)</em></p>
+                    <p><strong>Kết thúc tiết mục:</strong> Xin trân trọng cảm ơn phần trình diễn đầy cảm xúc của nghệ sĩ Nhà hát Dân ca Quan họ Bắc Ninh.</p>
+                  </td>
+                  <td class="text-center">1p</td>
+                </tr>
+                <tr>
+                  <td><strong>Giới thiệu đại biểu</strong></td>
+                  <td>
+                    <p>Tiếp theo chương trình, cho phép Huyền Vy trân trọng giới thiệu sự hiện diện của các vị đại biểu, khách quý:</p>
+                    <ul>
+                      <li>Đại diện lãnh đạo Sở Văn hóa, Thể thao và Du lịch Bắc Ninh. Bà Nguyễn Thị Mỹ Hạnh - GĐ Sở VHTT&DL tỉnh Bắc Ninh</li>
+                      <li>Đại diện Ban Giám đốc Nhà hát Dân ca Quan họ Bắc Ninh. Bà Lưu Mai Phương - GĐ Nhà hát DCQHBN</li>
+                      <li>Các nghệ sĩ, nghệ nhân Quan họ tiêu biểu như Nghệ sĩ ưu tú Hà Thảo Lan…</li>
+                      <li>Đại diện các cơ quan thông tấn, báo chí trung ương và địa phương.</li>
+                      <li>Các đối tác, đơn vị đồng hành cùng chương trình.</li>
+                    </ul>
+                    <p>Xin nhiệt liệt chào mừng sự hiện diện của quý vị!</p>
+                  </td>
+                  <td class="text-center">1p30</td>
+                </tr>
+                <tr>
+                  <td><strong>Trình chiếu teaser</strong></td>
+                  <td>
+                    <p>Kính thưa quý vị,</p>
+                    <p>“Kinh Bắc Ca Hành” là hành trình đưa tiếng hát Quan họ vượt qua biên giới địa lý, trở thành cầu nối văn hóa giữa Việt Nam và bạn bè quốc tế.</p>
+                    <p>Trong khuôn khổ chương trình, Ban Tổ chức sẽ triển khai chuỗi hoạt động biểu diễn, giao lưu văn hóa và quảng bá nghệ thuật Quan họ tại nhiều quốc gia, góp phần giới thiệu bản sắc văn hóa Việt Nam tới cộng đồng quốc tế cũng như kiều bào Việt Nam ở nước ngoài.</p>
+                    <p>Ngay sau đây, xin kính mời quý vị cùng hướng lên màn hình để theo dõi video giới thiệu Tour lưu diễn quốc tế “Kinh Bắc Ca Hành”.</p>
+                  </td>
+                  <td class="text-center">1p</td>
+                </tr>
+                <tr>
+                  <td><strong>Phát biểu của đại diện sở</strong></td>
+                  <td>
+                    <p>Kính thưa quý vị,</p>
+                    <p>Tiếp nối chương trình, Ban Tổ chức xin trân trọng kính mời bà Nguyễn Thị Mỹ Hạnh - GĐ Sở VHTT&DL Bắc Ninh lên phát biểu chỉ đạo và chia sẻ về ý nghĩa của Chương trình lưu diễn quốc tế “Kinh Bắc Ca Hành”.</p>
+                    <p>Xin trân trọng kính mời!</p>
+                    <p><em>(Đại diện Sở phát biểu)</em></p>
+                    <p><strong>MC:</strong> Xin trân trọng cảm ơn những chia sẻ và định hướng đầy ý nghĩa từ Đại diện Sở Văn hóa, Thể thao và Du lịch Bắc Ninh.</p>
+                  </td>
+                  <td class="text-center">2p</td>
+                </tr>
+                <tr>
+                  <td><strong>Phát biểu của đại diện nhà hát</strong></td>
+                  <td>
+                    <p>Thưa quý vị,</p>
+                    <p>Để hiểu rõ hơn về mục tiêu, nội dung và hành trình sắp tới của chương trình, xin trân trọng kính mời bà Lưu Mai Phương - Đại diện Ban Giám đốc Nhà hát Dân ca Quan họ Bắc Ninh lên phát biểu và chính thức công bố Chương trình lưu diễn quốc tế “Kinh Bắc Ca Hành”.</p>
+                    <p>Xin trân trọng kính mời!</p>
+                    <p><em>(Đại diện Nhà hát phát biểu)</em></p>
+                    <p><strong>MC:</strong> Xin trân trọng cảm ơn phần phát biểu và những thông tin vừa được chia sẻ.</p>
+                  </td>
+                  <td class="text-center">2p</td>
+                </tr>
+                <tr>
+                  <td><strong>Giao lưu và giải đáp với báo chí</strong></td>
+                  <td>
+                    <p>Kính thưa quý vị,</p>
+                    <p>Để giúp các cơ quan thông tấn, báo chí có thêm thông tin về Tour lưu diễn quốc tế “Kinh Bắc Ca Hành”, chúng tôi xin dành ít phút cho phần giao lưu và hỏi đáp.</p>
+                    <p>Xin kính mời các cơ quan báo chí đặt câu hỏi.</p>
+                    <p><em>(Báo chí đặt câu hỏi)</em></p>
+                    <p><strong>MC:</strong> Xin cảm ơn câu hỏi từ quý cơ quan báo chí. Xin trân trọng kính mời đại diện Ban Tổ chức chia sẻ.</p>
+                    <p><em>(Đại diện trả lời)</em></p>
+                    <p><strong>MC:</strong> Xin trân trọng cảm ơn phần chia sẻ từ đại diện Ban Tổ chức. Do thời lượng chương trình có hạn, các câu hỏi chi tiết hơn xin vui lòng trao đổi trực tiếp với Ban Tổ chức sau buổi họp báo. Toàn bộ thông tin chính thức của chương trình cũng đã được gửi trong bộ tài liệu báo chí dành cho quý vị.</p>
+                  </td>
+                  <td class="text-center">10p</td>
+                </tr>
+                <tr>
+                  <td><strong>Bế mạc</strong></td>
+                  <td>
+                    <p>Kính thưa quý vị,</p>
+                    <p>Họp báo Công bố Tour lưu diễn quốc tế “Kinh Bắc Ca Hành” đến đây xin được khép lại.</p>
+                    <p>Thay mặt Ban Tổ chức, xin chân thành cảm ơn sự hiện diện của quý vị đại biểu, các cơ quan báo chí, các đối tác và toàn thể khách mời đã đồng hành cùng chương trình.</p>
+                    <p>Kính chúc quý vị sức khỏe, thành công và tiếp tục đồng hành cùng hành trình đưa dân ca Quan họ Bắc Ninh vươn xa trên trường quốc tế.</p>
+                    <p>Xin trân trọng cảm ơn và kính chào!</p>
+                  </td>
+                  <td class="text-center">1p</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
   <script src="app.js"></script>
 
   <script>
