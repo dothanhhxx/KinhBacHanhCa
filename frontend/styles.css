@@ -871,7 +871,7 @@ ul, ol {
 }
 
 .timeline-title-vi {
-  font-family: var(--font-display);
+  font-family: 'SVN-Avo', sans-serif;
   font-size: var(--text-lg);
   font-weight: 700;
   margin-bottom: var(--space-1);
@@ -2117,7 +2117,7 @@ ul, ol {
 }
 
 .leader-card__name-vi {
-  font-family: var(--font-display);
+  font-family: 'SVN-Avo', sans-serif;
   font-size: var(--text-xl);
   font-weight: 700;
   color: var(--color-text);
@@ -2802,6 +2802,7 @@ em {
   display: none;
   max-width: 800px;
   margin: 0 auto;
+  font-family: 'SVN-Avo', sans-serif;
 }
 
 .doc-pane.active {
