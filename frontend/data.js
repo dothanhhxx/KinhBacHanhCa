@@ -16,7 +16,7 @@ const MUSEUM_DATA = {
     { "id": "about", "labelVi": "Giới thiệu", "labelEn": "About" },
     { "id": "periods", "labelVi": "Lãnh đạo", "labelEn": "Lãnh đạo" },
     { "id": "timeline", "labelVi": "Niên biểu", "labelEn": "Timeline" },
-    { "id": "gallery", "labelVi": "Hiện vật", "labelEn": "Artifacts" },
+    { "id": "gallery", "labelVi": "Báo chí", "labelEn": "Press" },
     { "id": "videos", "labelVi": "Video", "labelEn": "Videos" }
   ],
   "about": {
