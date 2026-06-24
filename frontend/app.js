@@ -457,27 +457,33 @@ function renderVideos() {
   container.appendChild(wrapper);
 
   // ── Featured video ────────────────────────────────────────────
-  document.getElementById('featured-video-title-vi').textContent = featured.titleVi;
-  document.getElementById('featured-video-title-en').textContent = featured.titleEn;
+  const featuredTitleVi = document.getElementById('featured-video-title-vi');
+  if (featuredTitleVi) featuredTitleVi.textContent = featured.titleVi;
+  
+  const featuredTitleEn = document.getElementById('featured-video-title-en');
+  if (featuredTitleEn) featuredTitleEn.textContent = featured.titleEn;
 
   const featuredCard = document.getElementById('featured-video-card');
-  const featuredBg   = featuredCard.querySelector('.video-card-bg');
+  if (featuredCard) {
+    const featuredBg = featuredCard.querySelector('.video-card-bg');
+    if (featuredBg) {
+      const featuredThumb = `https://img.youtube.com/vi/${featured.youtubeId}/maxresdefault.jpg`;
+      featuredBg.style.background = `url('${featuredThumb}') center/cover no-repeat`;
+      featuredBg.innerHTML = '';
+    }
 
-  const featuredThumb = `https://img.youtube.com/vi/${featured.youtubeId}/maxresdefault.jpg`;
-  featuredBg.style.background = `url('${featuredThumb}') center/cover no-repeat`;
-  featuredBg.innerHTML = '';
-
-  const openFeaturedVL = () => openVideoLightbox({
-    youtubeId: featured.youtubeId,
-    titleVi:   featured.titleVi,
-    titleEn:   featured.titleEn || '',
-    role:      '',
-    aspect:    'landscape'
-  });
-  featuredCard.addEventListener('click', openFeaturedVL);
-  featuredCard.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openFeaturedVL(); }
-  });
+    const openFeaturedVL = () => openVideoLightbox({
+      youtubeId: featured.youtubeId,
+      titleVi:   featured.titleVi,
+      titleEn:   featured.titleEn || '',
+      role:      '',
+      aspect:    'landscape'
+    });
+    featuredCard.addEventListener('click', openFeaturedVL);
+    featuredCard.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openFeaturedVL(); }
+    });
+  }
 }
 
 /** Helper: build a single video card and append it to a container */
